@@ -1,18 +1,25 @@
 GecoRisk:
-Sitema de Gestion de Conocimientos para la Gestion de Riesgos
+=========
+
+"Sistema de Gestion de Conocimientos para la Gestion de Riesgos"
 
 
-Instalation:
+Installation:
 ============
--In app root directory run:
+- Pull Repository.
 
-- Laravel:
+From app root directory run:
+
+- To install Laravel:
+
 composer install
 
-- Grunt
+- To install Grunt
+
 npm install
 
-- Bower
+- To install Bower
+
 cd /public/assets/js
 bower install
 
