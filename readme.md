@@ -2,6 +2,8 @@ GecoRisk:
 =========
 
 "Sistema de Gestion de Conocimientos para la Gestion de Riesgos"
+El sistema .....
+
 
 
 Installation:
