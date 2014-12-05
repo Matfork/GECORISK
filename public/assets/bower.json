@@ -1,0 +1,17 @@
+{
+  "name": "bower_gecorisk",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Matfork/GECORISK",
+  "license": "Matt Hernandez",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "highcharts": "~4.0.4"
+  }
+}
