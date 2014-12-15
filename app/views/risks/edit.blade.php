@@ -1,5 +1,5 @@
 <!-- app/views/risk/edit.blade.php -->
-
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +24,7 @@
 <!-- if there are creation errors, they will show here -->
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::model($risk, array('route' => array('risk.update', $risk->id), 'method' => 'PUT')) }}
+{{ Form::model($risk, array('method' => 'put', 'route' => array('risk.update', $risk->risk_id )) ) }}
 
     <div class="form-group">
         {{ Form::label('name', 'Name') }}
@@ -33,7 +33,7 @@
 
     <div class="form-group">
         {{ Form::label('description', 'Description') }}
-        {{ Form::email('description', null, array('class' => 'form-control')) }}
+        {{ Form::textarea('description', null, array('class' => 'form-control')) }}
     </div>
 
     <div class="form-group">

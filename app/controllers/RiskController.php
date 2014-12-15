@@ -103,7 +103,7 @@ class RiskController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		  // validate
+		// validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'name'       => 'required',
@@ -115,22 +115,20 @@ class RiskController extends \BaseController {
         // process the login
         if ($validator->fails()) {
             return Redirect::to('risks/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput(Input::except('password'));
+                ->withErrors($validator);
         } else {
             // store
-            $risk = Risk::find($id);
-            $risk->name       = Input::get('name');
+            $risk 		  = Risk::find($id);
+          	$risk->name       = Input::get('name');
             $risk->description= Input::get('description');
             $risk->riskType_id = Input::get('riskType_id');
             $risk->save();
 
             // redirect
             Session::flash('message', 'Successfully updated risk!');
-            return Redirect::to('risks');
+            return Redirect::to('risk');
         }
 	}
-
 
 	/**
 	 * Remove the specified resource from storage.

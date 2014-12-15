@@ -15,7 +15,7 @@
     </div>
     <ul class="nav navbar-nav">
         <li><a href="{{ URL::to('risk') }}">View All risks</a></li>
-        <li><a href="{{ URL::to('risk/create') }}">Create a Nerd</a>
+        <li><a href="{{ URL::to('risk/create') }}">Add a Risk</a>
     </ul>
 </nav>
 
@@ -31,8 +31,8 @@
         <tr>
             <td>ID</td>
             <td>Name</td>
-            <td>Email</td>
-            <td>Nerd Level</td>
+            <td>Description</td>
+            <td>Risk Type</td>
             <td>Actions</td>
         </tr>
     </thead>

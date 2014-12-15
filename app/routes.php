@@ -16,4 +16,21 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+
+
  Route::resource('risk', 'RiskController');
+ Route::resource('project', 'ProjectController');
+/* Route::resource('indicator', 'IndicatorController');
+ Route::resource('document', 'DocumentController');
+ Route::resource('solution', 'SolutionController');
+ Route::resource('documentType', 'DocumentTypeController');
+ Route::resource('riskType', 'RiskTypeController');
+*/
+
+ //Route::controller('riski', 'RiskController');
+
+
+ // Route::put('risk/{aaaa}', [
+ // 	'uses' => 'RiskController@update3',
+ // 	'as' => 'risk.update2']
+ // );

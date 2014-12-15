@@ -21,7 +21,7 @@ module.exports = function(grunt) {
             options: {
                 banner: ''
             },
-            target_1: {
+            gecorisk: {
                 // Source file
                 src: ['./public/assets/js/build/main.js'],
                 // Minified new file
