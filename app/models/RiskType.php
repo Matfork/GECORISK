@@ -9,8 +9,8 @@ class RiskType extends Eloquent {
 	//laverel tends to use field id as default, that's why we explicit use primeryKey to redifine the key
 	protected $primaryKey = 'riskType_id';
 
-	public function riskType(){
-		return $this->hasMany('Risk','risk_id');
+	public function risks(){
+		return $this->hasMany('Risk','riskType_id');
 	}
 
 	public function getName(){

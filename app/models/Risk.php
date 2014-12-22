@@ -25,5 +25,15 @@ class Risk extends Eloquent {
 		return $this->riskType_id;
 	}
 
+/*	public function projects(){
+		return $this->belongsToMany('Project','risks_projects','risk_id','project_id')
+		->withPivot('risk_project_id','probability','impact')
+		->leftJoin('solutions','risks_projects.risk_project_id','=','solutions.risk_project_id')
+		->select('risks_projects.description','solutions.description as sol_description');
+	}
+*/
+	public function riskProjects(){
+		return $this->hasMany('RiskProject','risk_id');
+	}
 	
 }

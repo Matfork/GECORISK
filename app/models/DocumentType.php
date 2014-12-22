@@ -10,7 +10,7 @@ class DocumentType extends Eloquent {
 
 
 	public function document(){
-		return $this->hasMany('Document','document_id');
+		return $this->hasMany('Document','documentType_id');
 	}
 
 	public function getName(){

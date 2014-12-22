@@ -16,5 +16,13 @@ class Solution extends Eloquent {
 	public function getDescription(){
 		return $this->description;
 	}
+
+	public function documents(){
+		return $this->hasMany('Document','document_id'); 
+	}
+
+	public function risksProjects(){
+		return $this->belongsTo('RisksDocuments','risk_project_id');
+	}	
 	
 }

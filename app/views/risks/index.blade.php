@@ -26,6 +26,7 @@
     <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
 
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -33,6 +34,8 @@
             <td>Name</td>
             <td>Description</td>
             <td>Risk Type</td>
+            <!-- <td>Projects_related</td> 
+            <td>RiskProject</td> -->
             <td>Actions</td>
         </tr>
     </thead>
@@ -42,10 +45,25 @@
             <td>{{ $value->risk_id }}</td>
             <td>{{ $value->name }}</td>
             <td>{{ $value->description }}</td>
-            <td>{{ $value->riskType->name }}</td>
+             <td>{{ $value->riskType->name }}</td>
             
-            <!-- we will also add show, edit, and delete buttons -->
+            <!--
             <td>
+                <?php
+                /*  using normal modal for pivot
+                    foreach($value->risk_projects  as $p1){
+                    print '<br>' . $p1->project;
+                }*/?>
+
+                <?php
+                /*  using pivot modal
+                    foreach($value->projects  as $p1){
+                    print '<br>' . $p1->name . ' ' . $p1->pivot->impact;
+                }*/?>
+            </td>
+            -->
+            <td>
+
 
                 <!-- delete the nerd (uses the destroy method DESTROY /risks/{id} -->
                 <!-- we will add this later since its a little more complicated than the other two buttons -->

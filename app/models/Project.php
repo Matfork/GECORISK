@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\Relations\Pivot;
+
 class Project extends Eloquent {
 
 	protected $table = 'projects';
@@ -34,5 +36,13 @@ class Project extends Eloquent {
 
 	public function setEndDate($date){
 		$this->end_date = $date;
+	}
+
+	public function risks(){
+		return $this->belongsToMany('Risk','risks_projects');
+	}
+
+	public function riskProjects(){
+		return $this->hasMany('RiskProject','project_id');
 	}
 }

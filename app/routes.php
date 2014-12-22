@@ -20,12 +20,13 @@ Route::get('/', function()
 
  Route::resource('risk', 'RiskController');
  Route::resource('project', 'ProjectController');
-/* Route::resource('indicator', 'IndicatorController');
+ Route::resource('indicator', 'IndicatorController');
  Route::resource('document', 'DocumentController');
  Route::resource('solution', 'SolutionController');
  Route::resource('documentType', 'DocumentTypeController');
  Route::resource('riskType', 'RiskTypeController');
-*/
+ Route::resource('riskProject', 'RiskProjectController');
+
 
  //Route::controller('riski', 'RiskController');
 

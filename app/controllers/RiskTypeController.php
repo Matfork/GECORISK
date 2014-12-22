@@ -9,7 +9,11 @@ class RiskTypeController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		 // get all the riskTypes
+        $riskTypes = RiskType::all();
+
+        // load the view and pass the riskTypes
+        return View::make('riskTypes.index')->with('riskTypes', $riskTypes);
 	}
 
 
@@ -20,7 +24,8 @@ class RiskTypeController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		 // load the create form (app/views/riskTypes/create.blade.php)
+        return View::make('riskTypes.create');
 	}
 
 
@@ -31,7 +36,27 @@ class RiskTypeController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+			 // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+            'name'      => 'required',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to('riskType/create')->withErrors($validator)->withInput(Input::except('name'));
+        } else {
+
+            $riskType = new RiskType;
+            $riskType->name 	= Input::get('name');
+            
+            $riskType->save();
+
+			// redirect
+            Session::flash('message', 'Successfully created riskType!');
+            return Redirect::to('riskType');
+        }
 	}
 
 
@@ -43,7 +68,11 @@ class RiskTypeController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+			 // get the riskType
+        $riskType = RiskType::find($id);
+        // show the view and pass the riskType to it
+        return View::make('riskTypes.show')->with('riskType', $riskType);
+	
 	}
 
 
@@ -55,7 +84,12 @@ class RiskTypeController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		// get the riskType
+        $riskType = RiskType::find($id);
+
+        // show the edit form and pass the riskType
+        return View::make('riskTypes.edit')->with('riskType', $riskType);
+
 	}
 
 
@@ -67,7 +101,28 @@ class RiskTypeController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+				// validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+            'name'      => 'required',
+        );
+     	$validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to('riskTypes/' . $id . '/edit')
+                ->withErrors($validator);
+        } else {
+
+            // store
+            $riskType = RiskType::find($id);
+ 			$riskType->name 	= Input::get('name');
+            $riskType->save();
+
+            // redirect
+            Session::flash('message', 'Successfully updated riskType!');
+            return Redirect::to('riskType');
+        }
 	}
 
 
@@ -79,7 +134,14 @@ class RiskTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		// delete
+        $riskType = RiskType::find($id);
+        $riskType->delete();
+
+        // redirect
+        Session::flash('message', 'Successfully deleted the riskType!');
+        return Redirect::to('riskType');
+	
 	}
 
 

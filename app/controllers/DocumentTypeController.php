@@ -9,7 +9,11 @@ class DocumentTypeController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		 // get all the documentTypes
+        $documentTypes = DocumentType::all();
+
+        // load the view and pass the documentTypes
+        return View::make('documentTypes.index')->with('documentTypes', $documentTypes);
 	}
 
 
@@ -20,7 +24,8 @@ class DocumentTypeController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		 // load the create form (app/views/documentTypes/create.blade.php)
+        return View::make('documentTypes.create');
 	}
 
 
@@ -31,7 +36,27 @@ class DocumentTypeController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+			 // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+            'name'      => 'required',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to('documentType/create')->withErrors($validator)->withInput(Input::except('name'));
+        } else {
+
+            $documentType = new DocumentType;
+            $documentType->name 	= Input::get('name');
+            
+            $documentType->save();
+
+			// redirect
+            Session::flash('message', 'Successfully created documentType!');
+            return Redirect::to('documentType');
+        }
 	}
 
 
@@ -43,7 +68,11 @@ class DocumentTypeController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+			 // get the documentType
+        $documentType = DocumentType::find($id);
+        // show the view and pass the documentType to it
+        return View::make('documentTypes.show')->with('documentType', $documentType);
+	
 	}
 
 
@@ -55,7 +84,12 @@ class DocumentTypeController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		// get the documentType
+        $documentType = DocumentType::find($id);
+
+        // show the edit form and pass the documentType
+        return View::make('documentTypes.edit')->with('documentType', $documentType);
+
 	}
 
 
@@ -67,7 +101,28 @@ class DocumentTypeController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+				// validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+            'name'      => 'required',
+        );
+     	$validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to('documentTypes/' . $id . '/edit')
+                ->withErrors($validator);
+        } else {
+
+            // store
+            $documentType = DocumentType::find($id);
+ 			$documentType->name 	= Input::get('name');
+            $documentType->save();
+
+            // redirect
+            Session::flash('message', 'Successfully updated documentType!');
+            return Redirect::to('documentType');
+        }
 	}
 
 
@@ -79,7 +134,14 @@ class DocumentTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		// delete
+        $documentType = DocumentType::find($id);
+        $documentType->delete();
+
+        // redirect
+        Session::flash('message', 'Successfully deleted the documentType!');
+        return Redirect::to('documentType');
+	
 	}
 
 
