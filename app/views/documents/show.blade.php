@@ -22,6 +22,7 @@
 
     <div class="jumbotron text-center">
         <h2>{{ $document->nameFile }}</h2>
+        <h2>{{ $value->description }}</h2>
         <h2>{{ $document->pathFile }}</h2>
         <h2>{{ $document->documentType->name }}</h2>
         <h2>{{ $document->solution }}</h2>

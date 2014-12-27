@@ -30,16 +30,19 @@
     <thead>
         <tr>
             <td>ID</td>
+            <td>Description</td>
             <td>NameFile</td>
             <td>PathFile</td>
             <td>Document Type</td>
             <td>Solution</td>
+            <td>File</td>
         </tr>
     </thead>
     <tbody>
     @foreach($documents as $key => $value)
         <tr>
             <td>{{ $value->document_id }}</td>
+            <td>{{ $value->description }}</td>
             <td>{{ $value->nameFile }}</td>
             <td>{{ $value->pathFile }}</td>
             <td>{{ $value->documentType->name }}</td>
@@ -60,7 +63,9 @@
 
                 <!-- edit this nerd (uses the edit method found at GET /documents/{id}/edit -->
                 <a class="btn btn-small btn-info" href="{{ URL::to('document/' . $value->document_id . '/edit') }}">Edit this Nerd</a>
-
+            </td>
+            <td>
+                {{ link_to($value->getCompleteFileRoute(), 'Link') }} 
             </td>
         </tr>
     @endforeach

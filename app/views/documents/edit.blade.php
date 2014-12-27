@@ -23,24 +23,23 @@
 <!-- if there are creation errors, they will show here -->
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::model($document, array('method' => 'put', 'route' => array('document.update', $document->document_id )) ) }}
+{{ Form::model($document, array('method' => 'put', 'files' => true, 'route' => array('document.update', $document->document_id )) ) }}
 
-   
     <div class="form-group">
         {{ Form::label('solution_id', 'Solution') }}
         {{ Form::text('solution_id', Input::old('name'), array('class' => 'form-control')) }}
     </div>
 
     <div class="form-group">
-        {{ Form::label('pathFile', 'Path File') }}
-        {{ Form::text('pathFile', Input::old('name'), array('class' => 'form-control')) }}
+        {{ Form::label('description', 'Description') }}
+        {{ Form::textArea('description', Input::old('description'), array('class' => 'form-control')) }}
     </div>
 
     <div class="form-group">
-        {{ Form::label('nameFile', 'Name File') }}
-        {{ Form::text('nameFile', Input::old('name'), array('class' => 'form-control')) }}
+        {{ Form::label('documentToUpload', 'Current File:'.$document->nameFile) }}
+        {{ Form::file('documentToUpload', Input::old('documentToUpload'), array('class' => 'form-control')) }}
     </div>
-
+    
     <div class="form-group">
         {{ Form::label('documentType_id', 'Document Type') }}
         {{ Form::select('documentType_id', DocumentType::lists('name','documentType_id'), Input::old('documentType_id'), array('class' => 'form-control')) }}

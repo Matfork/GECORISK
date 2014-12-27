@@ -39,30 +39,46 @@ class DocumentController extends \BaseController {
 			 // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'pathFile'      => 'required',
-            'nameFile'      => 'required',
+            'documentToUpload' =>  'required | mimes:jpeg,doc,docx,txt,pdf | max: 10485760' //10mb as max 
         );
+
+        //var_dump(Input::all());die;
         $validator = Validator::make(Input::all(), $rules);
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('document/create')->withErrors($validator)->withInput(Input::except('name'));
+            return Redirect::to('document/create')->withErrors($validator); //->withInput(Input::except('documentToUpload'));
         } else {
+			
+		/*	var_dump($file->getFilename());
+			var_dump($file->getClientOriginalName());
+			var_dump($file->getClientSize());
+			var_dump($file->getClientMimeType());
+			var_dump($file->guessClientExtension());
+			var_dump($file->getRealPath());*/
 
 			$file = Input::file('documentToUpload');
-			var_dump($file);
-			die;
+			
+			$filename = value(function() use ($file){
+		        $filename = str_random(10) . '.' . $file->getClientOriginalExtension();
+		        return strtolower($filename);
+		    });
 
-            $document = new Document;
-            $document->pathFile 	= Input::get('pathFile');
-            $document->nameFile 	= Input::get('nameFile');
-            $document->documentType_id 	= Input::get('documentType_id');
-            $document->solution_id 	= Input::get('solution_id');
-           
-            $document->save();
-
+			$document = new Document;
+			$path = $document->getUrlByType(Input::get('documentType_id'));
+			
+			if($file->move($path, $filename)){
+				$document->description 	= Input::get('description');
+				$document->pathFile 	= $path;
+	            $document->nameFile 	= $filename;
+	            $document->documentType_id 	= Input::get('documentType_id');
+	            $document->solution_id 	= Input::get('solution_id');
+	            $document->save();
+	            Session::flash('message', 'The document was created Successfully!');
+			}else{
+				Session::flash('message', 'There was an error uploading the selected file!');
+			}
 			// redirect
-            Session::flash('message', 'Successfully created document!');
             return Redirect::to('document');
         }
 	}
@@ -97,9 +113,7 @@ class DocumentController extends \BaseController {
 
         // show the edit form and pass the document
         return View::make('documents.edit')->with('document', $document);
-
 	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -109,30 +123,82 @@ class DocumentController extends \BaseController {
 	 */
 	public function update($id)
 	{
-				// validate
+		// validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'pathFile'      => 'required',
-            'nameFile'      => 'required',
+            'documentToUpload' =>  'mimes:jpeg,doc,docx,txt,pdf | max: 10485760' //10mb as max 
         );
-     	$validator = Validator::make(Input::all(), $rules);
 
+        $validator = Validator::make(Input::all(), $rules);
+			
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('documents/' . $id . '/edit')
-                ->withErrors($validator);
+             return Redirect::to('document/' . $id . '/edit')->withErrors($validator); //->withInput(Input::except('documentToUpload'));
         } else {
 
-            // store
-            $document = Document::find($id);
- 			$document->pathFile 	= Input::get('pathFile');
-            $document->nameFile 	= Input::get('nameFile');
-            $document->documentType_id 	= Input::get('documentType_id');
-            $document->solution_id 	= Input::get('solution_id');
-        	$document->save();
+        	$document = Document::find($id);
+        	$file = Input::file('documentToUpload');
 
-            // redirect
-            Session::flash('message', 'Successfully updated document!');
+        	if(empty($file)){
+        		$filename = $document->getNameFile();
+
+
+         		if(Input::get('documentType_id') != $document->getDocumentType_id){
+					//if there weren't changes on file but we DO change the documentType_id, we need to move the current file to another location
+					// depending the documentType_id, and we also upload the normal data in database,
+        			$path = $document->getUrlByType(Input::get('documentType_id'));
+
+        			if ( !File::move($document->getCompleteFileRoute(), $path.$filename))
+					{
+					   Session::flash('message', 'ERROR Moving File!');
+					}else{
+						$document->description 	= Input::get('description');
+						$document->pathFile 	= $path;
+			            $document->nameFile 	= $filename;
+			            $document->documentType_id 	= Input::get('documentType_id');
+			            $document->solution_id 	= Input::get('solution_id');
+			            $document->save();
+			            Session::flash('message', 'The document was updated Successfully!');
+					}
+        		}else{
+        			//if there weren't changes on file nor the documentType_id, we just skip those fields when updating
+        			//we just upload the normal data in database
+        			$document->description 	= Input::get('description');
+		            $document->solution_id 	= Input::get('solution_id');
+		            $document->save();
+		            Session::flash('message', 'The document was updated Successfully!');
+        		}
+			}else{
+				//if we are uploading a new file, we need first delete the current file and upload the new one
+				// and also update the info in database.
+
+				$filename = value(function() use ($file){
+			        $filename = str_random(10) . '.' . $file->getClientOriginalExtension();
+			        return strtolower($filename);
+			    });
+
+				
+				if (!File::delete($document->getCompleteFileRoute()))
+		      	{
+			    	Session::flash('message', 'ERROR deleted the File!');
+			    }else{		
+					$path = $document->getUrlByType(Input::get('documentType_id'));
+					
+					if($file->move($path, $filename)){
+						$document->description 	= Input::get('description');
+						$document->pathFile 	= $path;
+			            $document->nameFile 	= $filename;
+			            $document->documentType_id 	= Input::get('documentType_id');
+			            $document->solution_id 	= Input::get('solution_id');
+			            $document->save();
+			            Session::flash('message', 'The document was updated Successfully!');
+					}else{
+						Session::flash('message', 'There was an error uploading the selected file!');
+					}
+				}
+			}
+			
+			// redirect
             return Redirect::to('document');
         }
 	}
@@ -148,10 +214,16 @@ class DocumentController extends \BaseController {
 	{
 		// delete
         $document = Document::find($id);
-        $document->delete();
 
+		if (!File::delete($document->getCompleteFileRoute()))
+      	{
+	      	Session::flash('message', 'ERROR deleted the File!');
+      	}else{
+        	$document->delete();
+        	Session::flash('message', 'Document deleted Successfully!');
+      	}
+    
         // redirect
-        Session::flash('message', 'Successfully deleted the document!');
         return Redirect::to('document');
 	
 	}
