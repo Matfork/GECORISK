@@ -13,7 +13,7 @@ class DocumentController extends \BaseController {
         $documents = Document::all();
 
         // load the view and pass the documents
-        return View::make('documents.index')->with('documents', $documents);
+        return View::make('logicViews.documents.index')->with('documents', $documents);
 	}
 
 
@@ -25,7 +25,7 @@ class DocumentController extends \BaseController {
 	public function create()
 	{
 		 // load the create form (app/views/documents/create.blade.php)
-        return View::make('documents.create');
+        return View::make('logicViews.documents.create');
 	}
 
 
@@ -95,7 +95,7 @@ class DocumentController extends \BaseController {
 			 // get the document
         $document = Document::find($id);
         // show the view and pass the document to it
-        return View::make('documents.show')->with('document', $document);
+        return View::make('logicViews.documents.show')->with('document', $document);
 	
 	}
 
@@ -112,7 +112,7 @@ class DocumentController extends \BaseController {
         $document = Document::find($id);
 
         // show the edit form and pass the document
-        return View::make('documents.edit')->with('document', $document);
+        return View::make('logicViews.documents.edit')->with('document', $document);
 	}
 
 	/**

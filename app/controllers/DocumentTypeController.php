@@ -13,7 +13,7 @@ class DocumentTypeController extends \BaseController {
         $documentTypes = DocumentType::all();
 
         // load the view and pass the documentTypes
-        return View::make('documentTypes.index')->with('documentTypes', $documentTypes);
+        return View::make('logicViews.documentTypes.index')->with('documentTypes', $documentTypes);
 	}
 
 
@@ -25,7 +25,7 @@ class DocumentTypeController extends \BaseController {
 	public function create()
 	{
 		 // load the create form (app/views/documentTypes/create.blade.php)
-        return View::make('documentTypes.create');
+        return View::make('logicViews.documentTypes.create');
 	}
 
 
@@ -71,7 +71,7 @@ class DocumentTypeController extends \BaseController {
 			 // get the documentType
         $documentType = DocumentType::find($id);
         // show the view and pass the documentType to it
-        return View::make('documentTypes.show')->with('documentType', $documentType);
+        return View::make('logicViews.documentTypes.show')->with('documentType', $documentType);
 	
 	}
 
@@ -88,7 +88,7 @@ class DocumentTypeController extends \BaseController {
         $documentType = DocumentType::find($id);
 
         // show the edit form and pass the documentType
-        return View::make('documentTypes.edit')->with('documentType', $documentType);
+        return View::make('logicViews.documentTypes.edit')->with('documentType', $documentType);
 
 	}
 

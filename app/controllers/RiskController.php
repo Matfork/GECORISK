@@ -13,9 +13,8 @@ class RiskController extends \BaseController {
         $risks = Risk::all();
 
         // load the view and pass the risks
-        return View::make('risks.index')->with('risks', $risks);
+        return View::make('logicViews.risks.index')->with('risks', $risks);
 	}
-
 
 	/**
 	 * Show the form for creating a new resource.
@@ -25,7 +24,7 @@ class RiskController extends \BaseController {
 	public function create()
 	{
 		 // load the create form (app/views/risks/create.blade.php)
-        return View::make('risks.create');
+        return View::make('logicViews.risks.create');
 	}
 
 
@@ -74,7 +73,7 @@ class RiskController extends \BaseController {
 		 // get the risk
         $risk = Risk::find($id);
         // show the view and pass the risk to it
-        return View::make('risks.show')->with('risk', $risk);
+        return View::make('logicViews.risks.show')->with('risk', $risk);
 	}
 
 
@@ -91,7 +90,7 @@ class RiskController extends \BaseController {
 
         // show the edit form and pass the risk		
        
-        return View::make('risks.edit')->with('risk', $risk);
+        return View::make('logicViews.risks.edit')->with('risk', $risk);
 	}
 
 

@@ -13,7 +13,7 @@ class SolutionController extends \BaseController {
         $solutions = Solution::all();
 
         // load the view and pass the solutions
-        return View::make('solutions.index')->with('solutions', $solutions);
+        return View::make('logicViews.solutions.index')->with('solutions', $solutions);
 	}
 
 
@@ -25,7 +25,7 @@ class SolutionController extends \BaseController {
 	public function create()
 	{
 		 // load the create form (app/views/solutions/create.blade.php)
-        return View::make('solutions.create');
+        return View::make('logicViews.solutions.create');
 	}
 
 
@@ -70,7 +70,7 @@ class SolutionController extends \BaseController {
 		 // get the solution
         $solution = Solution::find($id);
         // show the view and pass the solution to it
-        return View::make('solutions.show')->with('solution', $solution);
+        return View::make('logicViews.solutions.show')->with('solution', $solution);
 	}
 
 
@@ -87,7 +87,7 @@ class SolutionController extends \BaseController {
 
         // show the edit form and pass the solution		
        
-        return View::make('solutions.edit')->with('solution', $solution);
+        return View::make('logicViews.solutions.edit')->with('solution', $solution);
 	}
 
 

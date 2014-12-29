@@ -13,10 +13,8 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('index');
 });
-
-
 
  Route::resource('risk', 'RiskController');
  Route::resource('project', 'ProjectController');
@@ -25,11 +23,23 @@ Route::get('/', function()
  Route::resource('solution', 'SolutionController');
  Route::resource('documentType', 'DocumentTypeController');
  Route::resource('riskType', 'RiskTypeController');
- Route::resource('riskProject', 'RiskProjectController');
 
+ Route::resource('riskProject', 'RiskProjectController'); 
+ 
+
+//Ajax by POST Request
+ Route::post('riskProject/filterFormByAjax', array(
+ 	'as' => 'riskProject.filterFormByAjax',
+ 	'uses' => 'RiskProjectController@filterFormByAjax'));
+
+
+//Ajax by GET Request
+ /*Route::get('riskProject_/filterFormByAjaxGet/{data}',array(
+ 	'as' => 'riskProject.filterFormByAjaxGet',
+ 	'uses' => 'RiskProjectController@filterFormByAjaxGet'));
+*/
 
  //Route::controller('riski', 'RiskController');
-
 
  // Route::put('risk/{aaaa}', [
  // 	'uses' => 'RiskController@update3',

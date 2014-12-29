@@ -1,0 +1,2 @@
+html,body{height:100%}.left-sidebar{position:fixed;width:200px;height:100%;background-color:#000;color:#fff}.left-sidebar .vertical-align{position:relative;top:50%;transform:translateY(-75%)}.left-sidebar .vertical-align h2{text-align:center}.left-sidebar .vertical-align a{color:#fff}.left-sidebar .vertical-align a:hover{color:#000}.main_content{position:relative;width:auto;overflow:hidden;margin-left:200px}
+/*# sourceMappingURL=styles.min.css.map */

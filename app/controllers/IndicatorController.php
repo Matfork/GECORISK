@@ -13,7 +13,7 @@ class IndicatorController extends \BaseController {
         $indicators = Indicator::all();
 
         // load the view and pass the indicators
-        return View::make('indicators.index')->with('indicators', $indicators);
+        return View::make('logicViews.indicators.index')->with('indicators', $indicators);
 	}
 
 
@@ -25,7 +25,7 @@ class IndicatorController extends \BaseController {
 	public function create()
 	{
 		 // load the create form (app/views/indicators/create.blade.php)
-        return View::make('indicators.create');
+        return View::make('logicViews.indicators.create');
 	}
 
 
@@ -75,7 +75,7 @@ class IndicatorController extends \BaseController {
 			 // get the indicator
         $indicator = Indicator::find($id);
         // show the view and pass the indicator to it
-        return View::make('indicators.show')->with('indicator', $indicator);
+        return View::make('logicViews.indicators.show')->with('indicator', $indicator);
 	
 	}
 
@@ -92,7 +92,7 @@ class IndicatorController extends \BaseController {
         $indicator = Indicator::find($id);
 
         // show the edit form and pass the indicator
-        return View::make('indicators.edit')->with('indicator', $indicator);
+        return View::make('logicViews.indicators.edit')->with('indicator', $indicator);
 
 	}
 

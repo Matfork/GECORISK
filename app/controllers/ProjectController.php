@@ -13,7 +13,7 @@ class ProjectController extends \BaseController {
         $projects = Project::all();
 
         // load the view and pass the projects
-        return View::make('projects.index')->with('projects', $projects);
+        return View::make('logicViews.projects.index')->with('projects', $projects);
 	}
 
 
@@ -25,7 +25,7 @@ class ProjectController extends \BaseController {
 	public function create()
 	{
 		 // load the create form (app/views/projects/create.blade.php)
-        return View::make('projects.create');
+        return View::make('logicViews.projects.create');
 	}
 
 
@@ -98,7 +98,7 @@ class ProjectController extends \BaseController {
 		 // get the project
         $project = Project::find($id);
         // show the view and pass the project to it
-        return View::make('projects.show')->with('project', $project);
+        return View::make('logicViews.projects.show')->with('project', $project);
 	}
 
 
@@ -114,7 +114,7 @@ class ProjectController extends \BaseController {
         $project = Project::find($id);
 
         // show the edit form and pass the project
-        return View::make('projects.edit')->with('project', $project);
+        return View::make('logicViews.projects.edit')->with('project', $project);
 	}
 
 
