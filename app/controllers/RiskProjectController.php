@@ -24,16 +24,25 @@ class riskProjectController extends \BaseController {
     public function filterFormByAjax() {
         
         $data = Input::all();
-        $risks = RiskProject::where('risk_id', '=', $data['val'])->get();
+
+        if($data['val'] == '0')  $riskProjects = RiskProject::all();
+        else                     $riskProjects = RiskProject::where('risk_id', '=', $data['val'])->get();
 
         //$queries = DB::getQueryLog();
         //var_dump($queries);
 
-        $response = array(
-            'status' => 'success',
-            'data' => $risks, 
-        );
+        $response = array();
+        $response['status'] = 'success';
 
+        /* DATA RESPONSE */
+
+        /*1.- We can use blades templates if we want to send all the html with data already formatted just to print it on a div*/
+        //$dataFromTemplate = View::make('includes.templateRiskProject')->with('riskProjects', $riskProjects)->renderSections()['riskProkectTemplate'];
+        //$response['data'] = $dataFromTemplate;
+        
+        //2.- Or we can just return the data and we manipulate it the way we like it, I'm using handlebars which is very similar to blade
+        $response['data'] = $riskProjects;
+       
         return Response::json( $response );
     }
 
