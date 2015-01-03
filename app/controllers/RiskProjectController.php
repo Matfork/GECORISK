@@ -24,8 +24,7 @@ class riskProjectController extends \BaseController {
     {
         
        if($type == "risk"){
-            $riskProjects = RiskProject::where('risk_id', '=', $id)->paginate(20);        
-            
+            $riskProjects = RiskProject::where('risk_id', '=', $id)->paginate(20);     
             return View::make('logicViews.risksProjects.index')
             ->with('riskProjects', $riskProjects)
             ->with('filterRisk', $id);

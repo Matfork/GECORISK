@@ -16,7 +16,6 @@ class SolutionController extends \BaseController {
         return View::make('logicViews.solutions.index')->with('solutions', $solutions);
 	}
 
-
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -24,10 +23,21 @@ class SolutionController extends \BaseController {
 	 */
 	public function create()
 	{
-		 // load the create form (app/views/solutions/create.blade.php)
         return View::make('logicViews.solutions.create');
 	}
 
+
+	public function indexFilter($risk_project_id)
+	{
+		$solutions = Solution::where('risk_project_id', '=', $risk_project_id)->get();
+		return View::make('logicViews.solutions.index')->with('solutions', $solutions);
+	}
+
+	public function createFilter($risk_project_id)
+	{
+		return View::make('logicViews.solutions.create')
+            ->with('filterRiskProject', $risk_project_id);
+	}
 
 	/**
 	 * Store a newly created resource in storage.
@@ -50,11 +60,12 @@ class SolutionController extends \BaseController {
             // store
             $solution = new Solution;
             $solution->description      = Input::get('description');
+            $solution->risk_project_id   = Input::get('risk_project_id');
             $solution->save();
 
             // redirect
             Session::flash('message', 'Successfully created solutions!');
-            return Redirect::to('solution');
+            return Redirect::to('solution/index/'.$solution->risk_project_id);
         }
 	}
 
@@ -87,7 +98,8 @@ class SolutionController extends \BaseController {
 
         // show the edit form and pass the solution		
        
-        return View::make('logicViews.solutions.edit')->with('solution', $solution);
+        return View::make('logicViews.solutions.edit')->with('solution', $solution)
+        ->with('filterRiskProject',$solution->risk_project_id);
 	}
 
 
@@ -114,11 +126,12 @@ class SolutionController extends \BaseController {
             // store
             $solution 		  = Solution::find($id);
           	$solution->description= Input::get('description');
+			$solution->risk_project_id= Input::get('risk_project_id');
             $solution->save();
 
             // redirect
             Session::flash('message', 'Successfully updated solution!');
-            return Redirect::to('solution');
+          	return Redirect::to('solution/index/'.$solution->risk_project_id);
         }
 	}
 
@@ -130,14 +143,20 @@ class SolutionController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		  // delete
-        $solution = Solution::find($id);
+		$solution = Solution::find($id);
         $solution->delete();
-
-        // redirect
-        Session::flash('message', 'Successfully deleted the solution!');
-        return Redirect::to('solution');
+        $cont = Solution::where('risk_project_id', '=', $solution->risk_project_id)->get();
+      	
+      	if(count($cont)>0){
+      		Session::flash('message', 'Successfully deleted the solution!');
+        	return Redirect::to('solution/index/'.$solution->risk_project_id);
+        }else{
+      		Session::flash('message', 'Successfully deleted solutions, no more solutions are left for: </br> Risk: '.$solution->risksProjects->risk->name.
+      			'</br> Project: '.$solution->risksProjects->project->name);
+      		return Redirect::to('riskProject');
+        }
+        
+        
 	}
-
 
 }

@@ -50,3 +50,14 @@ Route::get('/', function()
  	'uses' => 'RiskProjectController@createFilter',
  	'as' => 'riskProject.createFilter']
  );
+
+
+ Route::get('solution/index/{id}', [
+ 	'uses' => 'SolutionController@indexFilter',
+ 	'as' => 'solution.indexFilter']
+ );
+
+ Route::get('solution/create/{id}', [
+ 	'uses' => 'SolutionController@createFilter',
+ 	'as' => 'solution.createFilter']
+ );

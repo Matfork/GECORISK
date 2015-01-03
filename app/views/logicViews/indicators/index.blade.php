@@ -30,17 +30,18 @@
                 <td>{{ $value->max_indicator }}</td>
                 <td>{{ $value->color }}</td>
 
-                <td style="width:10%">
+                <td style="width:2%">
                     <!-- edit this nerd (uses the edit method found at GET /indicators/{id}/edit -->
-                    <a class="btn btn-small btn-warning btn-block" href="{{ URL::to('indicator/' . $value->indicator_id . '/edit') }}">Edit</a>
+                    <a class="btn btn-small btn-warning btn-block" href="{{ URL::to('indicator/' . $value->indicator_id . '/edit') }}">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                 </td>
-                <td style="width:10%">
+                <td style="width:2%">
                     <!-- delete the nerd (uses the destroy method DESTROY /indicators/{id} -->
                     <!-- we will add this later since its a little more complicated than the other two buttons -->
                      {{ Form::open(array('url' => 'indicator/' . $value->indicator_id)) }}
                         {{ Form::hidden('_method', 'DELETE') }}
-                        {{ Form::submit('Delete this indicator', array('class' => 'btn btn-danger btn-block')) }}
-                    {{ Form::close() }}
+                        {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', array('type'=>'submit' , 'class' => 'btn btn-danger btn-block')) }}
+                     {{ Form::close() }}
                 </td>
             </tr>
         @endforeach

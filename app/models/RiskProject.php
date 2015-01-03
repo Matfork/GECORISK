@@ -25,7 +25,7 @@ class RiskProject extends Eloquent {
 	}
 
 	public function solutions(){
-		return $this->hasMany('solutions','risk_project_id');
+		return $this->hasMany('Solution','risk_project_id');
 	}
 
 	public function project(){

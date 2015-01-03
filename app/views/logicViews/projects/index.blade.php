@@ -22,7 +22,7 @@
             <td>Begin Date</td>
             <td>End Date</td>
             <td>Finished</td> 
-            <td colspan="2">Actions</td>           
+            <td colspan="4">Actions</td>           
         </tr>
     </thead>
     <tbody>
@@ -35,32 +35,33 @@
             <td>{{ $value->getEndDate() }}</td>
             <td>{{ $value->getFinished()}}</td>            
 
-            <!-- we will also add show, edit, and delete buttons -->
-            <td style="width:10%;">          
+            <td style="width:10%;">
+                @if(count($value->riskProjects)>0)
+                    <a class="btn btn-small btn-info2 btn-block" href="{{ URL::to('riskProject/project/'.$value->project_id) }}">{{count($value->riskProjects)}} Linked Risks</a>
+                @else
+                    <span class="btn btn-small btn-info2 btn-block" >No linked Risks Yet</span>
+                @endif
+            </td>
+             <td style="width:10%;">
+                   <a class="btn btn-small btn-primary btn-block" href="{{ URL::to('riskProject/create/project/'.$value->project_id) }}">+ Link</a>
+            </td>
+             <!-- we will also add show, edit, and delete buttons -->
+            <td style="width:2%;">          
                 <!-- show the nerd (uses the show method found at GET /projects/{id} -->
                 <!-- <a class="btn btn-small btn-success" href="{{ URL::to('project/' . $value->project_id) }}">Show this project</a> -->
 
                 <!-- edit this nerd (uses the edit method found at GET /projects/{id}/edit -->
-                <a class="btn btn-small btn-warning" href="{{ URL::to('project/' . $value->project_id . '/edit') }}">Edit</a>
+                <a class="btn btn-small btn-warning btn-block" href="{{ URL::to('project/' . $value->project_id . '/edit') }}">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
             </td>
-            <td style="width:10%;">
+            <td style="width:2%;">
                   
                 <!-- delete the nerd (uses the destroy method DESTROY /projects/{id} -->
                 <!-- we will add this later since its a little more complicated than the other two buttons -->
-                 {{ Form::open(array('url' => 'project/' . $value->project_id, 'class' => 'pull-right')) }}
+                 {{ Form::open(array('url' => 'project/' . $value->project_id)) }}
                     {{ Form::hidden('_method', 'DELETE') }}
-                    {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                {{ Form::close() }}
-            </td>
-             <td style="width:10%;">
-                @if(count($value->riskProjects)>0)
-                    <a class="btn btn-small btn-info2" href="{{ URL::to('riskProject/project/'.$value->project_id) }}">{{count($value->riskProjects)}} Linked Risks</a>
-                @else
-                    <span class="btn btn-small btn-info2" >No linked Risks Yet</span>
-                @endif
-            </td>
-             <td style="width:10%;">
-                   <a class="btn btn-small btn-primary" href="{{ URL::to('riskProject/create/project/'.$value->project_id) }}">+ Link</a>
+                    {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', array('type'=>'submit' , 'class' => 'btn btn-danger btn-block')) }}
+                 {{ Form::close() }}
             </td>
         </tr>
     @endforeach

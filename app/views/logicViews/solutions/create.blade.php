@@ -6,7 +6,7 @@
 
         @include('includes.logicViews.solutions.header', array('param' => '1'))
             
-        <h1>Add solution</h1>
+        <h1>Adding solution</h1>
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
@@ -14,10 +14,12 @@
         <div class="form_mid">
            
             {{ Form::open(array('url' => 'solution')) }}
+                
+                {{ Form::hidden('risk_project_id', $filterRiskProject, array('class' => 'form-control')) }}
 
                 <div class="form-group">
                     {{ Form::label('description', 'Description') }}
-                    {{ Form::textArea('description', Input::old('descriṕtion'), array('class' => 'form-control', 'rows' => '5')) }}
+                    {{ Form::textArea('description', Input::old('description'), array('class' => 'form-control', 'rows' => '5')) }}
                 </div>
       
                 <div class="row">
@@ -25,7 +27,7 @@
                         {{ Form::submit('Add', array('class' => 'btn btn-success btn-block')) }}
                    </div>
                     <div class="col-md-6 form-group">
-                        <a class="btn btn-block btn-danger" href="{{ URL::to('solution') }}">Cancel</a>
+                        <a class="btn btn-block btn-danger" href="{{ URL::to('solution/index/'.$filterRiskProject) }}">Cancel</a>
                     </div>
                 </div>
 

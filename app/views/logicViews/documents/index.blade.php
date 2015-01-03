@@ -38,13 +38,14 @@
                         {{ link_to($value->getCompleteFileRoute(), 'Link', array('class' => 'btn btn-success btn-block') ) }} 
                     </td>
 
-                    <td style="width:10%">
-                        <a class="btn btn-small btn-warning btn-block" href="{{ URL::to('document/' . $value->document_id . '/edit') }}">Edit</a>
+                    <td style="width:2%">
+                        <a class="btn btn-small btn-warning btn-block" href="{{ URL::to('document/' . $value->document_id . '/edit') }}">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                     </td>
-                    <td style="width:10%">
+                    <td style="width:2%">
                         {{ Form::open(array('url' => 'document/' . $value->document_id)) }}
                             {{ Form::hidden('_method', 'DELETE') }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger btn-block')) }}
+                            {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', array('type'=>'submit' , 'class' => 'btn btn-danger btn-block')) }}
                         {{ Form::close() }}
                      </td>
                 </tr>
