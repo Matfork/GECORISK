@@ -61,3 +61,13 @@ Route::get('/', function()
  	'uses' => 'SolutionController@createFilter',
  	'as' => 'solution.createFilter']
  );
+
+ Route::get('document/index/{id}', [
+ 	'uses' => 'DocumentController@indexFilter',
+ 	'as' => 'document.indexFilter']
+ );
+
+ Route::get('document/create/{id}', [
+ 	'uses' => 'DocumentController@createFilter',
+ 	'as' => 'document.createFilter']
+ );

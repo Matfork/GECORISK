@@ -22,7 +22,7 @@ class Solution extends Eloquent {
 	}
 
 	public function documents(){
-		return $this->hasMany('Document','document_id'); 
+		return $this->hasMany('Document','solution_id'); 
 	}
 
 	public function risksProjects(){

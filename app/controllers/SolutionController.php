@@ -30,7 +30,12 @@ class SolutionController extends \BaseController {
 	public function indexFilter($risk_project_id)
 	{
 		$solutions = Solution::where('risk_project_id', '=', $risk_project_id)->get();
-		return View::make('logicViews.solutions.index')->with('solutions', $solutions);
+	
+      	if(count($solutions)>0){
+      		return View::make('logicViews.solutions.index')->with('solutions', $solutions);
+		}else{
+      		return Redirect::to('riskProject');
+        }
 	}
 
 	public function createFilter($risk_project_id)
@@ -46,16 +51,15 @@ class SolutionController extends \BaseController {
 	 */
 	public function store()
 	{
-		 // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
+		$rules = array(
             'description'      => 'required',
         );
         $validator = Validator::make(Input::all(), $rules);
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('solution/create')->withErrors($validator)->withInput(Input::except('name'));
+            //return Redirect::to('solution/create')->withErrors($validator)->withInput(Input::except('name'));
+           	return Redirect::to('solution/create/'.Input::get('risk_project_id'))->withErrors($validator)->withInput(Input::except('name'));
         } else {
             // store
             $solution = new Solution;
@@ -120,7 +124,7 @@ class SolutionController extends \BaseController {
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('solutions/' . $id . '/edit')
+            return Redirect::to('solution/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
             // store
@@ -147,16 +151,13 @@ class SolutionController extends \BaseController {
         $solution->delete();
         $cont = Solution::where('risk_project_id', '=', $solution->risk_project_id)->get();
       	
-      	if(count($cont)>0){
+      	if(count($cont)>0)
       		Session::flash('message', 'Successfully deleted the solution!');
-        	return Redirect::to('solution/index/'.$solution->risk_project_id);
-        }else{
+        else
       		Session::flash('message', 'Successfully deleted solutions, no more solutions are left for: </br> Risk: '.$solution->risksProjects->risk->name.
       			'</br> Project: '.$solution->risksProjects->project->name);
-      		return Redirect::to('riskProject');
-        }
-        
-        
+
+        return $this->indexFilter($solution->risk_project_id);
 	}
 
 }

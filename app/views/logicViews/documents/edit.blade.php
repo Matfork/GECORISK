@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
 
-        @include('includes.logicViews.documents.header', array('param' => '2'))
+        @include('includes.logicViews.documents.header', array('param' => '1'))
 
-        <h1>Edit {{ $document->name }}</h1>
+        <h1>Editing {{ $document->name }}</h1>
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
@@ -15,8 +15,7 @@
             {{ Form::model($document, array('method' => 'put', 'files' => true, 'route' => array('document.update', $document->document_id )) ) }}
 
                 <div class="form-group">
-                    {{ Form::label('solution_id', 'Solution') }}
-                    {{ Form::text('solution_id', Input::old('name'), array('class' => 'form-control')) }}
+                    {{ Form::hidden('solution_id', $filterSolution, array('class' => 'form-control')) }}
                 </div>
 
                  <div class="form-group">
@@ -39,7 +38,7 @@
                         {{ Form::submit('Edit', array('class' => 'btn btn-block btn-success')) }}
                     </div>
                     <div class="col-md-6 form-group">
-                        <a class="btn btn-block btn-danger" href="{{ URL::to('document') }}">Cancel</a>
+                          <a class="btn btn-block btn-danger" href="{{ URL::to('document/index/'.$filterSolution) }}">Cancel</a>
                     </div>
                 </div>
                

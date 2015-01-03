@@ -6,7 +6,7 @@
 
         @include('includes.logicViews.documents.header', array('param' => '1'))
            
-        <h1>Create a document</h1>
+        <h1>Adding document</h1>
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
@@ -16,8 +16,7 @@
             {{ Form::open(array('url' => 'document','files' => true)) }}
 
                 <div class="form-group">
-                    {{ Form::label('solution_id', 'Solution') }}
-                    {{ Form::text('solution_id', Input::old('name'), array('class' => 'form-control')) }}
+                    {{ Form::hidden('solution_id', $filterSolution, array('class' => 'form-control')) }}
                 </div>
 
                  <div class="form-group">
@@ -53,7 +52,7 @@
                         {{ Form::submit('Add', array('class' => 'btn btn-success btn-block')) }}
                     </div>
                     <div class="col-md-6 form-group">
-                        <a class="btn btn-block btn-danger" href="{{ URL::to('document') }}">Cancel</a>
+                        <a class="btn btn-block btn-danger" href="{{ URL::to('document/index/'.$filterSolution) }}">Cancel</a>
                     </div>
                 </div>
                

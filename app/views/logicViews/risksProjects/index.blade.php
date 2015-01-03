@@ -42,8 +42,8 @@
                 <thead>
                     <tr>
                         <td>ID</td>
-                        <td>Risk</td>
                         <td>Project</td>
+                        <td>Risk</td>
                         <td>Description</td>
                         <td>Probabilty</td>
                         <td>Impact</td>
@@ -54,8 +54,8 @@
                 @foreach($riskProjects as $key => $value)
                     <tr>
                         <td>{{ $value->risk_project_id}}</td>
-                        <td>{{ $value->risk->name }}</td>
                         <td>{{ $value->project->name }}</td>
+                        <td>{{ $value->risk->name }}</td>
                         <td>{{ $value->description}}</td>
                         <td>{{ $value->probability }}</td>
                         <td>{{ $value->impact }}</td>

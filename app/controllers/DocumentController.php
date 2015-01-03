@@ -29,6 +29,25 @@ class DocumentController extends \BaseController {
 	}
 
 
+	public function indexFilter($solution_id)
+	{
+		$documents = Document::where('solution_id', '=', $solution_id)->get();
+		
+		if(count($documents)>0){
+      		return View::make('logicViews.documents.index')->with('documents', $documents);
+		}else{
+			$solution = Solution::find($solution_id);
+      		return Redirect::to('solution/index/'.$solution->risksProjects->risk_project_id);
+        }
+
+	}
+
+	public function createFilter($solution_id)
+	{
+		return View::make('logicViews.documents.create')
+            ->with('filterSolution', $solution_id);
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -47,8 +66,8 @@ class DocumentController extends \BaseController {
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('document/create')->withErrors($validator); //->withInput(Input::except('documentToUpload'));
-        } else {
+            return Redirect::to('document/create/'.Input::get('solution_id'))->withErrors($validator);
+   		} else {
 			
 		/*	var_dump($file->getFilename());
 			var_dump($file->getClientOriginalName());
@@ -79,8 +98,8 @@ class DocumentController extends \BaseController {
 				Session::flash('message', 'There was an error uploading the selected file!');
 			}
 			// redirect
-            return Redirect::to('document');
-        }
+             return Redirect::to('document/index/'.$document->solution_id);
+       }
 	}
 
 
@@ -112,7 +131,8 @@ class DocumentController extends \BaseController {
         $document = Document::find($id);
 
         // show the edit form and pass the document
-        return View::make('logicViews.documents.edit')->with('document', $document);
+        return View::make('logicViews.documents.edit')->with('document', $document)
+        ->with('filterSolution',$document->solution_id);
 	}
 
 	/**
@@ -220,12 +240,18 @@ class DocumentController extends \BaseController {
 	      	Session::flash('message', 'ERROR deleted the File!');
       	}else{
         	$document->delete();
-        	Session::flash('message', 'Document deleted Successfully!');
-      	}
-    
+        	$cont = Document::where('solution_id', '=', $document->solution->solution_id)->get();
+
+	        if(count($cont)>0)
+	      		Session::flash('message', 'Document deleted Successfully!');
+	        else
+	      		Session::flash('message', 'Document deleted Successfully, no more documents are left for: </br> Risk: '
+	      			.$document->solution->risksProjects->risk->name.
+	      			'</br> Project: '.$document->solution->risksProjects->project->name.
+	      			'</br> Solution: '.$document->solution->description);
+		}    
         // redirect
-        return Redirect::to('document');
-	
+        return $this->indexFilter($document->solution->solution_id);	
 	}
 
 

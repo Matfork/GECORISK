@@ -11,8 +11,14 @@
             <div class="alert alert-info">{{ Session::get('message') }}</div>
         @endif
 
-        <h1>Document Module</h1>
-
+        <div style="height:60px;">
+            <div style="float:left"><h1>Document Module</h1></div>
+            <div style="float:right; margin-top:20px;"><a href="{{ URL::to('solution/index/'.$documents[0]->solution->risksProjects->risk_project_id) }}" class="btn btn-primary">Return to Solutions</a></div>
+        </div>
+        <h4>Project: {{$documents[0]->solution->risksProjects->project->name}} </h4>
+        <h4>Risk: {{$documents[0]->solution->risksProjects->risk->name}} </h4>
+        <h4>Solution: {{$documents[0]->solution->description}} </h4>
+        
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -34,8 +40,9 @@
                     <td>{{ $value->documentType->name }}</td>
                     <td>{{ $value->solution->description }}</td>
                 
-                    <td>
-                        {{ link_to($value->getCompleteFileRoute(), 'Link', array('class' => 'btn btn-success btn-block') ) }} 
+                    <td style="width:2%">
+                        <a class="btn btn-success btn-block" target="_blank" href="{{ URL::to($value->getCompleteFileRoute()) }}">
+                        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>  
                     </td>
 
                     <td style="width:2%">
