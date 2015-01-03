@@ -1,40 +1,36 @@
-<!-- app/views/riskTypes/create.blade.php -->
+@extends('layouts.default')
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Look! I'm CRUDding</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-<body>
+@section('content')
+
 <div class="container">
 
-<nav class="navbar navbar-inverse">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="{{ URL::to('riskType') }}">riskType Alert</a>
+    @include('includes.logicViews.riskTypes.header', array('param' => '1')) 
+
+    <h1>Creating Risk Type</h1>
+
+    <!-- if there are creation errors, they will show here -->
+    {{ HTML::ul($errors->all()) }}
+
+     <div class="form_mid">
+
+        {{ Form::open(array('url' => 'riskType')) }}
+
+            <div class="form-group">
+                {{ Form::label('name', 'Name') }}
+                {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    {{ Form::submit('Create', array('class' => 'btn btn-block btn-success')) }}
+                </div>
+                 <div class="col-md-6 form-group">
+                    <a class="btn btn-block btn-danger" href="{{ URL::to('riskType') }}">Cancel</a>
+                </div>
+            </div>
+        {{ Form::close() }}
+
     </div>
-    <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('riskType') }}">View All riskTypes</a></li>
-        <li><a href="{{ URL::to('riskType/create') }}">Create a riskType</a>
-    </ul>
-</nav>
-
-<h1>Create a riskType</h1>
-
-<!-- if there are creation errors, they will show here -->
-{{ HTML::ul($errors->all()) }}
-
-{{ Form::open(array('url' => 'riskType')) }}
-
-    <div class="form-group">
-        {{ Form::label('name', 'Name') }}
-        {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
-    </div>
-
-    {{ Form::submit('Create the riskType!', array('class' => 'btn btn-primary')) }}
-
-{{ Form::close() }}
-
 </div>
-</body>
-</html>
+
+@stop

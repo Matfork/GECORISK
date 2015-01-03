@@ -4,31 +4,34 @@
 
     <div class="container">
 
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ URL::to('documentType') }}">documentType Alert</a>
+        @include('includes.logicViews.documentTypes.header', array('param' => '2')) 
+
+        <h1>Edit {{ $documentType->name }}</h1>
+
+        <!-- if there are creation errors, they will show here -->
+        {{ HTML::ul($errors->all()) }}
+
+        <div class="form_mid">
+            
+            {{ Form::model($documentType, array('method' => 'put', 'route' => array('documentType.update', $documentType->documentType_id )) ) }}
+
+                <div class="form-group">
+                    {{ Form::label('name', 'Name') }}
+                    {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        {{ Form::submit('Edit', array('class' => 'btn btn-block btn-success')) }}
+                    </div>
+                     <div class="col-md-6 form-group">
+                        <a class="btn btn-block btn-danger" href="{{ URL::to('documentType') }}">Cancel</a>
+                    </div>
+                </div>
+
+            {{ Form::close() }}
+
         </div>
-        <ul class="nav navbar-nav">
-            <li><a href="{{ URL::to('documentType') }}">View All documentType</a></li>
-          </ul>
-    </nav>
-
-    <h1>Edit {{ $documentType->name }}</h1>
-
-    <!-- if there are creation errors, they will show here -->
-    {{ HTML::ul($errors->all()) }}
-
-    {{ Form::model($documentType, array('method' => 'put', 'route' => array('documentType.update', $documentType->documentType_id )) ) }}
-
-        <div class="form-group">
-            {{ Form::label('name', 'Name') }}
-            {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
-        </div>
-
-        {{ Form::submit('Edit this documentType!', array('class' => 'btn btn-primary')) }}
-
-    {{ Form::close() }}
-
     </div>
     
 @stop

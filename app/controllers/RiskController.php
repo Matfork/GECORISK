@@ -13,7 +13,8 @@ class RiskController extends \BaseController {
         $risks = Risk::all();
 
         // load the view and pass the risks
-        return View::make('logicViews.risks.index')->with('risks', $risks);
+        return View::make('logicViews.risks.index')
+        	->with('risks', $risks);
 	}
 
 	/**

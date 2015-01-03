@@ -10,7 +10,7 @@ class riskProjectController extends \BaseController {
 	public function index()
 	{
 		 // get all the riskProjects
-        $riskProjects = RiskProject::all();
+        $riskProjects = RiskProject::paginate(20);
         
        // echo "<pre>";
        // var_dump($riskProjects);  die;
@@ -20,28 +20,77 @@ class riskProjectController extends \BaseController {
 	}
 
 
+    public function indexFilter($type,$id)
+    {
+        
+       if($type == "risk"){
+            $riskProjects = RiskProject::where('risk_id', '=', $id)->paginate(20);        
+            
+            return View::make('logicViews.risksProjects.index')
+            ->with('riskProjects', $riskProjects)
+            ->with('filterRisk', $id);
+        }
+       else
+       {
+            $riskProjects = RiskProject::where('project_id', '=', $id)->paginate(20);
+            return View::make('logicViews.risksProjects.index')
+            ->with('riskProjects', $riskProjects)
+            ->with('filterProject', $id);
+       }
+
+
+    }
+
     //Ajax by POST Request
     public function filterFormByAjax() {
         
         $data = Input::all();
+        
+        if(!empty($data['valSearch'])){
+            $filter = ($data['valSearch']=="all") ? "" : $data['valSearch'];
+           /* $riskProjects = DB::table('risks_projects')
+                ->join('risks', 'risks.risk_id', '=', 'risks_projects.risk_id')
+                ->join('projects', 'projects.project_id', '=', 'risks_projects.project_id')
+                ->where('risks.name', 'like', '%'.$data['valSearch'].'%')
+                ->orWhere('projects.name', 'like', '%'.$data['valSearch'].'%')
+                ->get();*/
 
-        if($data['val'] == '0')  $riskProjects = RiskProject::all();
-        else                     $riskProjects = RiskProject::where('risk_id', '=', $data['val'])->get();
+            $riskProjects = RiskProject::join('risks', 'risks.risk_id', '=', 'risks_projects.risk_id')
+                ->join('projects', 'projects.project_id', '=', 'risks_projects.project_id')
+                ->where('risks.name', 'like', '%'.$filter.'%')
+                ->orWhere('projects.name', 'like', '%'.$filter.'%')
+                ->get();
 
-        //$queries = DB::getQueryLog();
-        //var_dump($queries);
+        }else{
+            if($data['valRisk'] == '0' && $data['valProject'] == '0') 
+                $riskProjects = RiskProject::all();
+            else if($data['valRisk'] == '0' && $data['valProject'] != '0') 
+                $riskProjects = RiskProject::where('project_id', '=', $data['valProject'])->get();
+            else if($data['valProject'] == '0' && $data['valRisk'] != '0') 
+                $riskProjects = RiskProject::where('risk_id', '=', $data['valRisk'])->get();
+            else
+                $riskProjects = RiskProject::where('risk_id', '=', $data['valRisk'])
+                ->where('project_id', '=', $data['valProject'])->get();
+
+            }
+
+        /*$queries = DB::getQueryLog();
+        var_dump($queries); */
 
         $response = array();
         $response['status'] = 'success';
-
+        $response['numberRows'] = $riskProjects->count(); 
+       
+        /*var_dump($riskProjects);
+        die;*/
         /* DATA RESPONSE */
 
         /*1.- We can use blades templates if we want to send all the html with data already formatted just to print it on a div*/
-        //$dataFromTemplate = View::make('includes.templateRiskProject')->with('riskProjects', $riskProjects)->renderSections()['riskProkectTemplate'];
-        //$response['data'] = $dataFromTemplate;
-        
+        $dataFromTemplate = View::make('includes.templateRiskProject')->with('riskProjects', $riskProjects)->renderSections()['riskProkectTemplate'];
+        $response['data'] = $dataFromTemplate;
+
         //2.- Or we can just return the data and we manipulate it the way we like it, I'm using handlebars which is very similar to blade
-        $response['data'] = $riskProjects;
+        //$response['data'] = $riskProjects;
        
         return Response::json( $response );
     }
@@ -76,6 +125,19 @@ class riskProjectController extends \BaseController {
         return View::make('logicViews.risksProjects.create');
 	}
 
+    public function createFilter($type,$id)
+    {
+        if($type == "risk"){
+            return View::make('logicViews.risksProjects.create')
+            ->with('filterRisk', $id);
+        }
+       else
+       {
+            return View::make('logicViews.risksProjects.create')
+            ->with('filterProject', $id);
+       }
+    }
+
 
 	/**
 	 * Store a newly created resource in storage.
@@ -84,7 +146,7 @@ class riskProjectController extends \BaseController {
 	 */
 	public function store()
 	{
-		 // validate
+	   // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'description'      => 'required',
@@ -97,7 +159,14 @@ class riskProjectController extends \BaseController {
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('riskProject/create')->withErrors($validator)->withInput(Input::except('name'));
+            if(Input::get('type')=='risk')
+                return Redirect::to('riskProject/create/'.Input::get('type').'/'.Input::get('risk_id'))->withErrors($validator)->withInput(Input::except('name'));
+            else if(Input::get('type')=='project')
+                return Redirect::to('riskProject/create/'.Input::get('type').'/'.Input::get('project_id'))->withErrors($validator)->withInput(Input::except('name'));
+            else
+                return Redirect::to('riskProject/create')->withErrors($validator)->withInput(Input::except('name'));
+       
+            
         } else {
             // store
             $riskProject = new RiskProject;

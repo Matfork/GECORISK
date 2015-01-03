@@ -41,7 +41,12 @@ Route::get('/', function()
 
  //Route::controller('riski', 'RiskController');
 
- // Route::put('risk/{aaaa}', [
- // 	'uses' => 'RiskController@update3',
- // 	'as' => 'risk.update2']
- // );
+ Route::get('riskProject/{type}/{id}', [
+ 	'uses' => 'RiskProjectController@indexFilter',
+ 	'as' => 'riskProject.indexFilter']
+ );
+
+ Route::get('riskProject/create/{type}/{id}', [
+ 	'uses' => 'RiskProjectController@createFilter',
+ 	'as' => 'riskProject.createFilter']
+ );

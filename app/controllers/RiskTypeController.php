@@ -13,7 +13,7 @@ class RiskTypeController extends \BaseController {
         $riskTypes = RiskType::all();
 
         // load the view and pass the riskTypes
-        return View::make('riskTypes.index')->with('riskTypes', $riskTypes);
+        return View::make('logicViews.riskTypes.index')->with('riskTypes', $riskTypes);
 	}
 
 
@@ -25,7 +25,7 @@ class RiskTypeController extends \BaseController {
 	public function create()
 	{
 		 // load the create form (app/views/riskTypes/create.blade.php)
-        return View::make('riskTypes.create');
+        return View::make('logicViews.riskTypes.create');
 	}
 
 
@@ -71,7 +71,7 @@ class RiskTypeController extends \BaseController {
 			 // get the riskType
         $riskType = RiskType::find($id);
         // show the view and pass the riskType to it
-        return View::make('riskTypes.show')->with('riskType', $riskType);
+        return View::make('logicViews.riskTypes.show')->with('riskType', $riskType);
 	
 	}
 
@@ -88,7 +88,7 @@ class RiskTypeController extends \BaseController {
         $riskType = RiskType::find($id);
 
         // show the edit form and pass the riskType
-        return View::make('riskTypes.edit')->with('riskType', $riskType);
+        return View::make('logicViews.riskTypes.edit')->with('riskType', $riskType);
 
 	}
 
