@@ -8,6 +8,9 @@ class Document extends Eloquent {
 
 	protected $primaryKey = 'document_id';
 
+	public function getName(){
+		return $this->name;
+	}
 
 	public function getPathFile(){
 		return $this->pathFile;

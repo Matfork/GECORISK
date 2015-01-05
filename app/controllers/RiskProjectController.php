@@ -236,7 +236,7 @@ class riskProjectController extends \BaseController {
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('logicViews.risksProjects./' . $id . '/edit')
+            return Redirect::to('riskProject/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
             // store

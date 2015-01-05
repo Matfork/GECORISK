@@ -20,5 +20,16 @@ class Indicator extends Eloquent {
 		return $this->color;
 	}
 
+	public static function processData($val,$type){
+		
+		if (!Session::has('indicators'))
+			Session::put('indicators', Indicator::all());
+
+		foreach (Session::get('indicators') as $key => $value) {
+			if($val >= $value->min_indicator && $val <= $value->max_indicator && $type==$value->indicator_group) 
+				return $value->color_value; 
+		}
+
+	}
 	
 }

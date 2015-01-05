@@ -17,17 +17,6 @@
 
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        {{ Form::label('risk_id', 'Risk') }}
-                        @if(isset($filterRisk))
-                            {{ Form::select('risk_id', Risk::lists('name','risk_id'), $filterRisk, array('class' => 'form-control','disabled')) }}
-                            {{ Form::hidden('risk_id', $filterRisk, array('class' => 'form-control')) }}
-                            {{ Form::hidden('type', 'risk', array('class' => 'form-control')) }}
-                        @else
-                            {{ Form::select('risk_id', Risk::lists('name','risk_id'), 0, array('class' => 'form-control')) }}
-                        @endif
-                    </div>
-
-                    <div class="col-md-6 form-group">
                         {{ Form::label('project_id', 'Project') }}
                         @if(isset($filterProject))
                             {{ Form::select('project_id', Project::lists('name','project_id'), $filterProject, array('class' => 'form-control','disabled')) }}
@@ -37,18 +26,28 @@
                             {{ Form::select('project_id', Project::lists('name','project_id'), 0, array('class' => 'form-control')) }}
                         @endif
                     </div>
+                    <div class="col-md-6 form-group">
+                        {{ Form::label('risk_id', 'Risk') }}
+                        @if(isset($filterRisk))
+                            {{ Form::select('risk_id', Risk::lists('name','risk_id'), $filterRisk, array('class' => 'form-control','disabled')) }}
+                            {{ Form::hidden('risk_id', $filterRisk, array('class' => 'form-control')) }}
+                            {{ Form::hidden('type', 'risk', array('class' => 'form-control')) }}
+                        @else
+                            {{ Form::select('risk_id', Risk::lists('name','risk_id'), 0, array('class' => 'form-control')) }}
+                        @endif
+                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 form-group">
                         {{ Form::label('probability', 'Probability') }}
-                        {{ Form::text('probability', Input::old('probability'), array('class' => 'form-control')) }}
+                        {{ Form::select('probability', ['1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'], Input::old('probability'), array('class' => 'form-control')) }}
                     </div>
 
                      <div class="col-md-6 form-group">
                         {{ Form::label('impact', 'Impact') }}
-                        {{ Form::text('impact', Input::old('impact'), array('class' => 'form-control')) }}
-                    </div>
+                        {{ Form::select('impact', ['1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'], Input::old('impact'), array('class' => 'form-control')) }}
+                     </div>
                 </div>
 
                 <div class="row">

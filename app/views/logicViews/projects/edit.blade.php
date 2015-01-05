@@ -49,9 +49,16 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    {{ Form::label('finished', 'Finished Project?') }}
-                    {{ Form::checkbox('chbx_finished',  Input::old('finished'), $project->finished) }}
+                 <div class="row">
+                    <div class="col-md-6 form-group">
+                        {{ Form::label('finished', 'Finished Project?') }}
+                        {{ Form::checkbox('chbx_finished', TRUE, FALSE) }}
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                            {{ Form::label('projectType_id', 'Project Type') }}
+                            {{ Form::select('projectType_id', ProjectType::lists('name','projectType_id'), Input::old('projectType_id'), array('class' => 'form-control')) }}
+                    </div>
                 </div>
 
                 <div class="form-group">

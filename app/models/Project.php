@@ -45,4 +45,8 @@ class Project extends Eloquent {
 	public function riskProjects(){
 		return $this->hasMany('RiskProject','project_id');
 	}
+
+	public function projectType(){
+		return $this->belongsTo('ProjectType','projectType_id');
+	}
 }

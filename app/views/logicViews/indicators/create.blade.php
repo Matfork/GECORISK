@@ -26,9 +26,19 @@
                 </div>
             </div>
 
-            <div class="form-group">
+             <div class="form-group">
                 {{ Form::label('color', 'Color') }}
-                {{ Form::select('color', ['Red' => 'Red','Yellow' => 'Yellow', 'Green' => 'Green'],0, array('class' => 'form-control')) }}
+                {{ Form::text('color', Input::old('color'), array('class' => 'form-control')) }}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('color_value', 'Color Value') }}
+                {{ Form::text('color_value', Input::old('color_value'), array('class' => 'form-control')) }}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('indicator_group', 'Indicator Group') }}
+                {{ Form::select('indicator_group', ['frecuency_semaphore' => 'Frecuency Semaphore', 'risk_level' => 'Risk Level'], Input::old('indicator_group'), array('class' => 'form-control')) }}
             </div>
 
             <div class="row">

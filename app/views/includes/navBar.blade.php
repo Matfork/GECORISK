@@ -5,9 +5,30 @@
 			<li><a href="{{ URL::to('risk') }}">{{ trans('leftSideBar.risk') }}</a></li>
 			<li><a href="{{ URL::to('project') }}">{{ trans('leftSideBar.project') }}</a></li>
 			<li><a href="{{ URL::to('riskProject') }}">{{ trans('leftSideBar.links') }}</a></li>
-			<li><a href="">{{ trans('leftSideBar.queries') }}</a>	</li>
+			<li class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+			      {{ trans('leftSideBar.queries') }}<span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu" style="background-color:#000;">
+			      <li><a href="{{ URL::to('frecuency/risk') }}">{{ trans('leftSideBar.queries_risk') }}</a></li>
+			   	  <li><a href="{{ URL::to('frecuency/project') }}">{{ trans('leftSideBar.queries_project') }}</a></li>
+			   	  <li><a href="{{ URL::to('frecuency/document') }}">{{ trans('leftSideBar.queries_document') }}</a></li>
+			    </ul>
+		    </li>
 			<li><a href="">{{ trans('leftSideBar.reports') }}</a></li>
+			<li class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+			      {{ trans('leftSideBar.admin') }} <span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu" style="background-color:#000;">
+			      <li><a href="{{ URL::to('documentType') }}">{{ trans('leftSideBar.documentType') }}</a></li>
+			   	  <li><a href="{{ URL::to('riskType') }}">{{ trans('leftSideBar.riskType') }}</a></li>
+			      <li><a href="{{ URL::to('projectType') }}">{{ trans('leftSideBar.projectType') }}</a></li>
+			      <li><a href="{{ URL::to('indicator') }}">{{ trans('leftSideBar.indicators') }}</a></li>
+			    </ul>
+		    </li>
 		</ul>
+
 	</div>
 </div>
 
@@ -27,8 +48,28 @@
 			 	<li><a href="{{ URL::to('risk') }}">{{ trans('leftSideBar.risk') }}</a></li>
 				<li><a href="{{ URL::to('project') }}">{{ trans('leftSideBar.project') }}</a></li>
 				<li><a href="{{ URL::to('riskProject') }}">{{ trans('leftSideBar.links') }}</a></li>
-				<li><a href="">{{ trans('leftSideBar.queries') }}</a>	</li>
-				<li><a href="">{{ trans('leftSideBar.reports') }}</a></li>				
+				<li class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				      {{ trans('leftSideBar.queries') }}<span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu">
+				      <li><a href="{{ URL::to('frecuency/risk') }}">{{ trans('leftSideBar.queries_risk') }}</a></li>
+				   	  <li><a href="{{ URL::to('frecuency/project') }}">{{ trans('leftSideBar.queries_project') }}</a></li>
+			   		  <li><a href="{{ URL::to('frecuency/document') }}">{{ trans('leftSideBar.queries_document') }}</a></li>
+				    </ul>
+			    </li>
+				<li><a href="">{{ trans('leftSideBar.reports') }}</a></li>
+				<li class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				      Admin <span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu" >
+				      <li><a href="{{ URL::to('documentType') }}">{{ trans('leftSideBar.documentType') }}</a></li>
+				   	  <li><a href="{{ URL::to('riskType') }}">{{ trans('leftSideBar.riskType') }}</a></li>
+			      	  <li><a href="{{ URL::to('projectType') }}">{{ trans('leftSideBar.projectType') }}</a></li>
+				      <li><a href="{{ URL::to('indicator') }}">{{ trans('leftSideBar.indicators') }}</a></li>
+				    </ul>
+			    </li>			
 			</ul>
 		</div>
 	</div>

@@ -14,13 +14,13 @@ class AddConstraintsToTablesTable extends Migration {
 	{
 		Schema::table('risks', function(Blueprint $table)
 		{
-			$table->foreign('riskType_id')->references('riskType_id')->on('risk_types')->onDelete('cascade');
+			$table->foreign('riskType_id')->references('riskType_id')->on('risk_types');
 		});
 
 		Schema::table('documents', function(Blueprint $table)
 		{
 			$table->foreign('solution_id')->references('solution_id')->on('solutions')->onDelete('cascade');
-			$table->foreign('documentType_id')->references('documentType_id')->on('document_types')->onDelete('cascade');
+			$table->foreign('documentType_id')->references('documentType_id')->on('document_types');
 		});
 
 		Schema::table('risks_projects', function(Blueprint $table)

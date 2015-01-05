@@ -22,7 +22,7 @@
                     </div>
                
                     <div class="col-md-6 form-group">
-                        {{ Form::label('riskType_id', 'risk Level') }}
+                        {{ Form::label('riskType_id', 'Risk Type') }}
                         {{ Form::select('riskType_id', RiskType::lists('name','riskType_id'), Input::old('riskType_id'), array('class' => 'form-control')) }}
                     </div>
                 </div>

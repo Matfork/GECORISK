@@ -17,7 +17,16 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
-		return View::make('hello');
+		$this->loadInitData();
+		return View::make('index');
+	}
+
+	public function loadInitData()
+	{
+		if (!Session::has('indicators'))
+		{
+			Session::put('indicators', Indicator::all());
+		}
 	}
 
 }

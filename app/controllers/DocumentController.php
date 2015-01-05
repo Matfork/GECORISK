@@ -69,15 +69,15 @@ class DocumentController extends \BaseController {
             return Redirect::to('document/create/'.Input::get('solution_id'))->withErrors($validator);
    		} else {
 			
-		/*	var_dump($file->getFilename());
-			var_dump($file->getClientOriginalName());
-			var_dump($file->getClientSize());
-			var_dump($file->getClientMimeType());
-			var_dump($file->guessClientExtension());
-			var_dump($file->getRealPath());*/
-
 			$file = Input::file('documentToUpload');
-			
+
+			// var_dump($file->getFilename());
+			// var_dump($file->getClientOriginalName());
+			// var_dump($file->getClientSize());
+			// var_dump($file->getClientMimeType());
+			// var_dump($file->guessClientExtension());
+			// var_dump($file->getRealPath());
+
 			$filename = value(function() use ($file){
 		        $filename = str_random(10) . '.' . $file->getClientOriginalExtension();
 		        return strtolower($filename);
@@ -89,6 +89,7 @@ class DocumentController extends \BaseController {
 			if($file->move($path, $filename)){
 				$document->description 	= Input::get('description');
 				$document->pathFile 	= $path;
+				$document->name 		= $file->getClientOriginalName();
 	            $document->nameFile 	= $filename;
 	            $document->documentType_id 	= Input::get('documentType_id');
 	            $document->solution_id 	= Input::get('solution_id');
@@ -207,6 +208,7 @@ class DocumentController extends \BaseController {
 					if($file->move($path, $filename)){
 						$document->description 	= Input::get('description');
 						$document->pathFile 	= $path;
+						$document->name 		= $file->getClientOriginalName();	         
 			            $document->nameFile 	= $filename;
 			            $document->documentType_id 	= Input::get('documentType_id');
 			            $document->solution_id 	= Input::get('solution_id');
@@ -219,7 +221,7 @@ class DocumentController extends \BaseController {
 			}
 			
 			// redirect
-            return Redirect::to('document');
+             return Redirect::to('document/index/'.$document->solution_id);
         }
 	}
 

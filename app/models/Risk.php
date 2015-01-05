@@ -8,6 +8,9 @@ class Risk extends Eloquent {
 
 	protected $primaryKey = 'risk_id';
 
+	private $frecuency;
+
+	private $totalProjectsAssociated;
 
 	public function riskType(){
 		return $this->belongsTo('RiskType','riskType_id');
@@ -24,6 +27,24 @@ class Risk extends Eloquent {
 	public function getRiskType_id(){
 		return $this->riskType_id;
 	}
+
+	public function setFrecuency($frecuency){
+		$this->frecuency = $frecuency;
+	}
+
+	public function getFrecuency(){
+		return $this->frecuency;
+	}
+
+	public function setTotalProjectsAssociated($totalProjectsAssociated){
+		$this->totalProjectsAssociated = $totalProjectsAssociated;
+	}
+
+	public function getTotalProjectsAssociated(){
+		return $this->totalProjectsAssociated;
+	}
+
+	
 
 /*	public function projects(){
 		return $this->belongsToMany('Project','risks_projects','risk_id','project_id')

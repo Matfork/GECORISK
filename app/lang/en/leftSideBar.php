@@ -6,4 +6,12 @@ return array(
 	'links'     => 'Links Modules',
 	'queries'     => 'Queries Module',
 	'reports'     => 'Charts Module',
+	'indicators'   => 'Indicators',
+	'riskType'     => 'Risk Types',
+	'projectType'     => 'Project Types',
+	'documentType' => 'Document Types	',
+	'admin' => 'Admin Module',
+	'queries_risk' => 'Risk Frecuency',
+	'queries_project' => 'Project Frecuency',	
+	'queries_document' => 'Document Main'	
 );

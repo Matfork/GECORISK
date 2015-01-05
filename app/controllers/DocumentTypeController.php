@@ -110,7 +110,7 @@ class DocumentTypeController extends \BaseController {
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('documentTypes/' . $id . '/edit')
+            return Redirect::to('documentType/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
 

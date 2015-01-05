@@ -17,7 +17,7 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <td>ID</td>
+                        <td>#</td>
                         <td>Name</td>
                         <td>Description</td>
                         <td>Risk Type</td>
@@ -29,7 +29,7 @@
                 <tbody>
                 @foreach($risks as $key => $value)
                     <tr>
-                        <td style="width:5%;">{{ $value->risk_id }}</td>
+                        <td style="width:5%;">{{ $key+1 }}</td>
                         <td style="width:20%;">{{ $value->name }}</td>
                         <td style="width:35%;">{{ $value->description }}</td>
                         <td style="width:20%;">{{ $value->riskType->name }}</td>

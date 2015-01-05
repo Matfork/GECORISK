@@ -42,6 +42,8 @@ class IndicatorController extends \BaseController {
             'min_indicator'      => 'required',
             'max_indicator' => 'required',
             'color' => 'required',
+            'color_value' => 'required',
+            'indicator_group' => 'required',
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -54,7 +56,8 @@ class IndicatorController extends \BaseController {
             $indicator->min_indicator= Input::get('min_indicator');
             $indicator->max_indicator= Input::get('max_indicator');
             $indicator->color 	= Input::get('color');
-            
+           	$indicator->color_value	= Input::get('color_value');
+            $indicator->indicator_group	= Input::get('indicator_group');  
             $indicator->save();
 
 			// redirect
@@ -111,12 +114,14 @@ class IndicatorController extends \BaseController {
             'min_indicator'      => 'required',
             'max_indicator' => 'required',
             'color' => 'required',
+            'color_value' => 'required',
+            'indicator_group' => 'required',
         );
      	$validator = Validator::make(Input::all(), $rules);
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('indicators/' . $id . '/edit')
+            return Redirect::to('indicator/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
 
@@ -124,6 +129,8 @@ class IndicatorController extends \BaseController {
             $indicator = Indicator::find($id);
  			$indicator->min_indicator= Input::get('min_indicator');
             $indicator->max_indicator= Input::get('max_indicator');
+           	$indicator->color_value	= Input::get('color_value');
+            $indicator->indicator_group	= Input::get('indicator_group');  
             $indicator->color 	= Input::get('color');
             $indicator->save();
 

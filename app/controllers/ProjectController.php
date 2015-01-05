@@ -69,6 +69,7 @@ class ProjectController extends \BaseController {
             $project = new Project;
             $project->name       = Input::get('name');
             $project->description= Input::get('description');
+            $project->projectType_id= Input::get('projectType_id');
             //$project->beginDate  = Input::get('beginDate');
             $project->setBeginDate($formatBeginDate);
             $project->setEndDate($formatEndDate);
@@ -139,7 +140,7 @@ class ProjectController extends \BaseController {
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('projects/' . $id . '/edit')
+            return Redirect::to('project/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
 
@@ -151,7 +152,8 @@ class ProjectController extends \BaseController {
             $project = Project::find($id);
             $project->name       = Input::get('name');
             $project->description= Input::get('description');
-            $project->setBeginDate($formatBeginDate);
+            $project->projectType_id= Input::get('projectType_id');
+          	$project->setBeginDate($formatBeginDate);
             $project->setEndDate($formatEndDate);
             $project->finished 	= Input::get('chbx_finished')==NULL ? FALSE : TRUE;
             $project->save();

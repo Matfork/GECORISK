@@ -10,6 +10,10 @@
 	      display: none;
 	}
 
+	.nav>li>a:hover, .nav>li>a:focus{
+		color:#000;
+	}
+
 	.left-sidebar {
 		position: fixed;
 	    width: 200px;
@@ -65,7 +69,7 @@
 	}
 
 
-	/*button colors for bootstrap*/
+	/*purple button for bootstrap*/
 
 	.btn-info2 { 
 	  color: #ffffff; 
@@ -111,4 +115,9 @@
 	.btn-info2 .badge { 
 	  color: #763AC4; 
 	  background-color: #ffffff; 
+	}
+
+	/*Frecuency Pages*/
+	.table_frencuency{
+		margin-bottom: 50px;
 	}

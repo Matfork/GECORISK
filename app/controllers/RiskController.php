@@ -114,7 +114,7 @@ class RiskController extends \BaseController {
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('risks/' . $id . '/edit')
+            return Redirect::to('risk/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
             // store

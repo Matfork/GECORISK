@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('index');
-});
-
+ Route::get('/', 'HomeController@showWelcome');
+ 
  Route::resource('risk', 'RiskController');
  Route::resource('project', 'ProjectController');
  Route::resource('indicator', 'IndicatorController');
@@ -23,51 +20,87 @@ Route::get('/', function()
  Route::resource('solution', 'SolutionController');
  Route::resource('documentType', 'DocumentTypeController');
  Route::resource('riskType', 'RiskTypeController');
-
+ Route::resource('projectType', 'ProjectTypeController');
  Route::resource('riskProject', 'RiskProjectController'); 
- 
 
-//Ajax by POST Request
- Route::post('riskProject/filterFormByAjax', array(
+ //Route::controller('riski', 'RiskController');
+
+
+
+Route::group(array('prefix' => 'riskProject'), function()
+{
+	 Route::get('{type}/{id}', [
+	 	'uses' => 'RiskProjectController@indexFilter',
+	 	'as' => 'riskProject.indexFilter']
+	 );
+
+	 Route::get('create/{type}/{id}', [
+	 	'uses' => 'RiskProjectController@createFilter',
+	 	'as' => 'riskProject.createFilter']
+	 );
+
+	 //Ajax by POST Request
+ 	Route::post('filterFormByAjax', array(
  	'as' => 'riskProject.filterFormByAjax',
  	'uses' => 'RiskProjectController@filterFormByAjax'));
 
 
-//Ajax by GET Request
- /*Route::get('riskProject_/filterFormByAjaxGet/{data}',array(
- 	'as' => 'riskProject.filterFormByAjaxGet',
- 	'uses' => 'RiskProjectController@filterFormByAjaxGet'));
-*/
-
- //Route::controller('riski', 'RiskController');
-
- Route::get('riskProject/{type}/{id}', [
- 	'uses' => 'RiskProjectController@indexFilter',
- 	'as' => 'riskProject.indexFilter']
- );
-
- Route::get('riskProject/create/{type}/{id}', [
- 	'uses' => 'RiskProjectController@createFilter',
- 	'as' => 'riskProject.createFilter']
- );
+	//Ajax by GET Request
+	 /*Route::get('filterFormByAjaxGet/{data}',array(
+	 	'as' => 'riskProject.filterFormByAjaxGet',
+	 	'uses' => 'RiskProjectController@filterFormByAjaxGet'));
+	*/
+}); 
 
 
- Route::get('solution/index/{id}', [
- 	'uses' => 'SolutionController@indexFilter',
- 	'as' => 'solution.indexFilter']
- );
+Route::group(array('prefix' => 'solution'), function()
+{
+	 Route::get('index/{id}', [
+	 	'uses' => 'SolutionController@indexFilter',
+	 	'as' => 'solution.indexFilter']
+	 );
 
- Route::get('solution/create/{id}', [
- 	'uses' => 'SolutionController@createFilter',
- 	'as' => 'solution.createFilter']
- );
+	 Route::get('create/{id}', [
+	 	'uses' => 'SolutionController@createFilter',
+	 	'as' => 'solution.createFilter']
+	 );
+}); 
 
- Route::get('document/index/{id}', [
- 	'uses' => 'DocumentController@indexFilter',
- 	'as' => 'document.indexFilter']
- );
 
- Route::get('document/create/{id}', [
- 	'uses' => 'DocumentController@createFilter',
- 	'as' => 'document.createFilter']
- );
+Route::group(array('prefix' => 'document'), function()
+{
+	 Route::get('index/{id}', [
+	 	'uses' => 'DocumentController@indexFilter',
+	 	'as' => 'document.indexFilter']
+	 );
+
+	 Route::get('create/{id}', [
+	 	'uses' => 'DocumentController@createFilter',
+	 	'as' => 'document.createFilter']
+	 );
+}); 
+
+Route::group(array('prefix' => 'frecuency'), function()
+{
+    Route::get('risk/{id?}', [
+	 	'uses' => 'FrecuencyController@indexFrecuencyRisk',
+	 	'as' => 'frecuency.indexFrecuencyRisk']
+	);
+
+    Route::get('project', [
+	 	'uses' => 'FrecuencyController@indexFrecuencyProject',
+	 	'as' => 'frecuency.indexFrecuencyProject']
+	 );
+
+    Route::get('document', [
+	 	'uses' => 'FrecuencyController@indexDocumentMain',
+	 	'as' => 'frecuency.indexDocumentMain']
+	 );
+
+
+     //Ajax by POST Request
+ 	Route::post('searchAssociations', array(
+ 	'as' => 'frecuency.searchAssociations',
+ 	'uses' => 'FrecuencyController@searchAssociations'));
+
+});
