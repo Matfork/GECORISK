@@ -15,7 +15,17 @@
 			   	  <li><a href="{{ URL::to('frecuency/document') }}">{{ trans('leftSideBar.queries_document') }}</a></li>
 			    </ul>
 		    </li>
-			<li><a href="">{{ trans('leftSideBar.reports') }}</a></li>
+	
+			<li class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+			    	{{ trans('leftSideBar.reports') }}<span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu" style="background-color:#000;">
+			      <li><a href="{{ URL::to('chart/projectRisk') }}">{{ trans('leftSideBar.chart_projectRisk') }}</a></li>
+			   	  <li><a href="{{ URL::to('chart/riskMatrix') }}">{{ trans('leftSideBar.chart_riskMatrix') }}</a></li>
+			   	</ul>
+		    </li>
+			
 			<li class="dropdown">
 			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
 			      {{ trans('leftSideBar.admin') }} <span class="caret"></span>
@@ -58,8 +68,16 @@
 			   		  <li><a href="{{ URL::to('frecuency/document') }}">{{ trans('leftSideBar.queries_document') }}</a></li>
 				    </ul>
 			    </li>
-				<li><a href="">{{ trans('leftSideBar.reports') }}</a></li>
 				<li class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				    	{{ trans('leftSideBar.reports') }}<span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu">
+				      <li><a href="{{ URL::to('chart/projectRisk') }}">{{ trans('leftSideBar.chart_projectRisk') }}</a></li>
+				   	  <li><a href="{{ URL::to('chart/riskMatrix') }}">{{ trans('leftSideBar.chart_riskMatrix') }}</a></li>
+				   	</ul>
+			    </li>
+			    <li class="dropdown">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
 				      Admin <span class="caret"></span>
 				    </a>

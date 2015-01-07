@@ -16,6 +16,8 @@
     "bootstrap-datepicker": "latest",
     "jquery-file-upload": "~9.8.1",
     "handlebars": "~2.0.0",
-    "datatables": "~1.10.4"
+    "datatables": "~1.10.4",
+    "datatables-plugins": "~1.0.1",
+    "datatables-tabletools": "~2.2.3"
   }
 }

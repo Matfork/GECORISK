@@ -104,3 +104,18 @@ Route::group(array('prefix' => 'frecuency'), function()
  	'uses' => 'FrecuencyController@searchAssociations'));
 
 });
+
+
+
+Route::group(array('prefix' => 'chart'), function()
+{
+    Route::get('projectRisk/{id?}', [
+	 	'uses' => 'ChartController@indexChartProjectRisk',
+	 	'as' => 'chart.indexChartProjectRisk']
+	);
+
+    Route::get('riskMatrix/{id?}', [
+	 	'uses' => 'ChartController@indexChartRiskMatrix',
+	 	'as' => 'chart.indexChartRiskMatrix']
+	 );
+});

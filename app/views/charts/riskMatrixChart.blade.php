@@ -4,20 +4,25 @@
 
     <script>
         $(function(){
-            FrecuencyJS.initialProjectSetUp();
+            initialChartProjectRiskSetUp.initialProjectSetUp();
         });
     </script> 
 
     <div class="container">
 
-        @include('includes.logicViews.frecuency.header', array('param' => '1')) 
+        @include('includes.logicViews.charts.header', array('param' => '1')) 
 
         <!-- will be used to show any messages -->
         @if (Session::has('message'))
             <div class="alert alert-info">{{ Session::get('message') }}</div>
         @endif
         
-        <h1>Projects Frecuency </h1>
+       
+        <div style="height:75px;">
+            <div style="float:left"> <h1>Projects-Risk Chart </h1></div>
+            <div class="exportNav">
+            </div>
+        </div>
 
         <div class="table_frencuency table-responsive">
            <table id="tableProjectFrecuency" class="table table-striped table-bordered">

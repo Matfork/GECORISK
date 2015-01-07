@@ -19,6 +19,7 @@ var FrecuencyJS = (function (){
                             $(".table_associated").html(data.data);
                             $("#tableProjectAssociation").DataTable( {
                                 "iDisplayLength": 5,
+                                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
                             });
                         }else{
                             $(".ajaxMsg").html("Whoops! There is no data to display!").show();
@@ -34,8 +35,7 @@ var FrecuencyJS = (function (){
             
             $("#tableRiskFrecuency").DataTable({
                 "iDisplayLength": 5,   
-                /*"bFilter": true,
-                "sDom":'l<"selects">frtip'*/
+                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
             });
 
              $( '.filters' ).on( 'change', function() {   
@@ -51,27 +51,41 @@ var FrecuencyJS = (function (){
                 
                 frecuencySearchAssociations(params);
             });
-
-            /*$("div.selects").html("<select name='select1' id='select1'>
-                <option value='asd'>asd</option>
-                <option value='31'>31</option>
-                <option value=''>all</option>
-            </select>");
-
-            var oTable;
-              oTable = $('#tableRiskFrecuency').dataTable();
-
-            $('#select1').change( function() { 
-                    oTable.fnFilter( $(this).val(),2); 
-            });*/
         },
 
         initialProjectSetUp: function(){
             
-            $("#tableProjectFrecuency").DataTable({
-                "iDisplayLength": 5,   
+            var tableProjectFrecuency = $("#tableProjectFrecuency").DataTable({
+                "iDisplayLength": 5,
+                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
+                "dom": '<"row export"><"clear">lfrtip',   
             });
-            
+
+            var tableTools = new $.fn.dataTable.TableTools( tableProjectFrecuency, {
+                "sSwfPath": BASE_URL+"/assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf",
+                 "aButtons": [ 
+                     {
+                        "sExtends": "xls",
+                        "sCharSet": "utf8",
+                        "sFileName": 'excelExport.xls',
+                        "sButtonText": "XLS"
+                     },
+                     {
+                        "sExtends": "csv",
+                        "sCharSet": "utf8",
+                        "sFileName": 'csvExport.csv',
+                        "sButtonText": "CSV"
+                     },
+                     {
+                        "sExtends": "pdf",
+                        "sCharSet": "utf8",
+                        "sFileName": 'PDF_Export.pdf',
+                        "sButtonText": "PDF"
+                     },
+                 ]
+            });
+              
+            $('.exportNav').html(tableTools.fnContainer());
 
             $( '.table_frencuency' ).on( 'click','.btnProjectAssociated', function() {
                 /*for AJAX Post*/
@@ -85,8 +99,42 @@ var FrecuencyJS = (function (){
         },
 
         initialDocumentSetUp: function(){
-            $("#tableDocumentMain").DataTable({
-                "iDisplayLength": 10,   
+            
+            var tableDocumentMain = $("#tableDocumentMain").DataTable({
+                "iDisplayLength": 10,
+                "sPaginationType": "bs_normal",
+                "sDom": '<"row"><"clear"><"row" <"col-md-3" l><"col-md-6 selectForms"><"col-md-3" f>r>t<"row"ip>',
+                "bFilter": true,
+            });
+
+            var tableTools = new $.fn.dataTable.TableTools( tableDocumentMain, {
+                "sSwfPath": BASE_URL+"/assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf",
+                 "aButtons": [ 
+                     {
+                        "sExtends": "xls",
+                        "sCharSet": "utf8",
+                        "sFileName": 'excelExport.xls',
+                        "sButtonText": "XLS"
+                     },
+                     {
+                        "sExtends": "csv",
+                        "sCharSet": "utf8",
+                        "sFileName": 'csvExport.csv',
+                        "sButtonText": "CSV"
+                     },
+                     {
+                        "sExtends": "pdf",
+                        "sCharSet": "utf8",
+                        "sFileName": 'PDF_Export.pdf',
+                        "sButtonText": "PDF"
+                     },
+                 ]
+            });
+
+            $('.exportNav').html(tableTools.fnContainer());     
+
+            $('.container').on('change','#selectRisk , #selectProject',function() { 
+                $('#tableDocumentMain').dataTable().fnFilter($(this).val()); 
             });
         },
     }

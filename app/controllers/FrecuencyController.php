@@ -45,7 +45,7 @@ class FrecuencyController extends \BaseController {
         }
 
       
-        return View::make('logicViews.frecuencyRisk')->with('risks', $risk)->with('filterProject_id', $filterProject_id)
+        return View::make('queries.frecuencyRisk')->with('risks', $risk)->with('filterProject_id', $filterProject_id)
                 ->with('total_projects', $maxProjects);
     }
 
@@ -55,7 +55,7 @@ class FrecuencyController extends \BaseController {
         $project = Project::all();
 
         // load the view and pass the projects
-        return View::make('logicViews.frecuencyProject')->with('projects', $project);
+        return View::make('queries.frecuencyProject')->with('projects', $project);
     }
 
     public function indexDocumentMain()
@@ -64,7 +64,7 @@ class FrecuencyController extends \BaseController {
         $documents = Document::all();
 
         // load the view and pass the projects
-        return View::make('logicViews.documentMain')->with('documents', $documents);
+        return View::make('queries.documentMain')->with('documents', $documents);
     }
 
     //Ajax by POST Request

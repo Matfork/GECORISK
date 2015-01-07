@@ -1,11 +1,22 @@
 @extends('layouts.default')
 
 @section('content')
+
+    <script type="text/javascript" src="{{ url('assets/bower_components/datatables-bootstrap3/BS3/assets/js/datatables.js') }}"></script>    
+    <link rel="stylesheet" href="{{ url('assets/bower_components/datatables-bootstrap3/BS3/assets/css/datatables.css') }}">
+
+    <script type="text/javascript" src="{{ url('assets/bower_components/datatables-tabletools/js/dataTables.tableTools.js') }}"></script>    
+    <link rel="stylesheet" href="{{ url('assets/bower_components/datatables-tabletools/css/dataTables.tableTools.css') }}">
+
     <script>
      $(function(){
             FrecuencyJS.initialDocumentSetUp();
+            $(".selectForms").html('<?php echo "<div class="."col-md-6"."> <b>Filter by Risk:</b>". Form::select("selectRisk", [""=>"---- All ----"] + Risk::lists("name","name"), 0, array("id" => "selectRisk")) ."</div>" ?>');
+            $(".selectForms").append('<?php echo "<div class="."col-md-6"."> <b>Filter by Project:</b> ". Form::select("selectProject", [""=>"---- All ----"] + Project::lists("name","name"), 0, array("id" => "selectProject")) ."</div>" ?>');
         });
+
     </script>
+
     <div class="container">
 
        @include('includes.logicViews.frecuency.header', array('param' => '1')) 
@@ -15,7 +26,11 @@
             <div class="alert alert-info">{{ Session::get('message') }}</div>
         @endif
 
-        <h1>Document Main</h1>
+        <div style="height:75px;">
+            <div style="float:left"> <h1>Document Main</h1></div>
+            <div class="exportNav">
+            </div>
+        </div>
         
         <table id="tableDocumentMain" class="table table-striped table-bordered">
             <thead>
