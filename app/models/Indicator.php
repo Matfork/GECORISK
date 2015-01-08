@@ -20,14 +20,24 @@ class Indicator extends Eloquent {
 		return $this->color;
 	}
 
-	public static function processData($val,$type){
+	public static function processData($val,$type,$rbg = FALSE){
 		
 		if (!Session::has('indicators'))
 			Session::put('indicators', Indicator::all());
 
 		foreach (Session::get('indicators') as $key => $value) {
-			if($val >= $value->min_indicator && $val <= $value->max_indicator && $type==$value->indicator_group) 
-				return $value->color_value; 
+			if($val >= $value->min_indicator && $val <= $value->max_indicator && $type==$value->indicator_group){
+				if($rbg)
+					switch ($value->color_value) {
+						case 'danger' : return "#d9534f";
+						case 'warning': return "#f0ad4e";
+						case 'success': return "#5cb85c";	
+						default 	  :	return "#000";
+					}
+				else
+					return $value->color_value;
+			}
+				 
 		}
 
 	}
