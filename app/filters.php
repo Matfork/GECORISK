@@ -88,3 +88,8 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+
+// Only authenticated users will be able to access routes that begins with
+// 'admin'. Ex: 'admin/posts', 'admin/categories'.
+Route::when('admin*', 'auth');

@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'smtp.gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,8 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
-
+	'from' => array( 'address' => 'dahv24@gmail.com', 'name' => 'GecoRisk' ), 	
 	/*
 	|--------------------------------------------------------------------------
 	| E-Mail Encryption Protocol
@@ -80,7 +79,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => 'dahv24@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +92,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => '',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -120,5 +119,4 @@ return array(
 	*/
 
 	'pretend' => false,
-
 );
