@@ -1,0 +1,104 @@
+//chart.scss
+
+    .notFoundMatrix{
+        display: none;
+    }
+
+    .riskMatrix{
+        display: none;
+
+        .tableRiskMatrix{
+            height: 700px;
+
+            th{
+                text-align: center;
+                background-color: #F3F3F3;
+                color: #fff;
+                text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+            }
+
+            .th_align{
+                vertical-align: middle;
+            }
+
+            .customTrRisk {
+                td{
+                    vertical-align: middle;
+                    text-align: center;
+                    padding: 0px;
+
+                     .riskInfo{
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+
+                        &>.value_risk{
+                            width: 20%;
+                            height: 20%;
+                            top: 0;
+                            right: 0;
+                            border: 1px solid rgba(0, 0, 0, .15);
+                            position: absolute;
+                        }
+
+                        &>.td_outer_text{
+                            padding-bottom: 20px;
+                            padding-top: 20px;
+                            padding-right: 20px;
+                            height: 100%;
+                            position: absolute;
+                            text-align: left;
+                            width: 100%;
+
+                            &>.td_inner_text{
+                                height: 100%;
+                                overflow: hidden;
+
+                                &>ol{
+                                    margin-top: 0px;
+                                    padding-left: 30px;
+                                }
+                            }
+                        }
+
+                        &>.more_info_text{
+                            width: 100%;
+                            height: 20px;
+                            bottom: 0;
+                            position: absolute;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                th{
+                    width: 50px !important;
+                    vertical-align: middle;
+                }
+            }
+
+            .customTrRisk_bottom{
+                height: 50px;
+            }
+
+            .vertical-text {
+                position: relative;
+                transform: rotate(90deg);
+                font-size: 20px;
+                letter-spacing: 20px;
+                width: 1em;
+                margin: -100px auto 0px;
+            }
+
+            .horizonal-text {
+                font-size: 20px;
+                letter-spacing: 20px;
+                text-align: center;
+            }
+        }    
+    }
+
+   
+
+    
+
+    

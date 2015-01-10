@@ -1,34 +1,84 @@
 var ChartJS = (function (){
 
     var frecuencySearchAssociations = function(params){
-            
-            $(".table_associated").html("");
-            $(".ajaxMsg").hide();
+        $(".table_associated").html("");
+        $(".ajaxMsg").hide();
 
-            //Ajax by POST Request
-            $.ajax({  
-                url: BASE_URL+"/frecuency/searchAssociations",  
-                dataType: 'json',
-                data: params,
-                type: 'POST',
-                success:function(data){
-                    if(data.status == 'success'){
-                        console.log(data);
-                        if (data.numberRows>0){
-                            //Using Blade
-                            $(".table_associated").html(data.data);
-                            $("#tableProjectAssociation").DataTable( {
-                                "iDisplayLength": 5,
-                                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
-                            });
-                        }else{
-                            $(".ajaxMsg").html("Whoops! There is no data to display!").show();
-                        }
+        //Ajax by POST Request
+        $.ajax({  
+            url: BASE_URL+"/frecuency/searchAssociations",  
+            dataType: 'json',
+            data: params,
+            type: 'POST',
+            success:function(data){
+                if(data.status == 'success'){
+                    console.log(data);
+                    if (data.numberRows>0){
+                        //Using Blade
+                        $(".table_associated").html(data.data);
+                        $("#tableProjectAssociation").DataTable( {
+                            "iDisplayLength": 5,
+                             "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
+                        });
+                    }else{
+                        $(".ajaxMsg").html("Whoops! There is no data to display!").show();
                     }
                 }
-            })
-      
+            }
+        })
     };
+
+    var fillRiskTable = function(dataToFill){
+        $.each(dataToFill, function(key, risk){            
+            $(".tableRiskMatrix tr.customTrRisk").each(function(i,row){
+                var impact = $(row).data('impact');
+
+                $(row).find('td').each(function(i,col){
+                    var prob = $(col).data('prob');
+                    var risk_level = impact * prob;
+
+                    if(risk_level==risk.risk_level && prob==risk.probability && impact==risk.impact){
+                        //console.log(risk.name);
+                        $(col).children().children().eq(1).children().eq(0).children().eq(0).append("<li>"+risk.name+"</li>");
+                        $(col).children().children().eq(2).html("...");
+                    }
+                });
+            });
+        });
+    }
+
+    var hideAllPopovers = function() {
+       $('.more_info_text').each(function() {
+            $(this).popover('hide');
+        });  
+    };
+
+    var createPopOvers = function(){
+        $(".more_info_text").each(function(){
+            var textPopOver =  $(this).parent().children().eq(1).children().text();
+            var hmtlPopOver =  $(this).parent().children().eq(1).children().html();
+            
+            if(textPopOver.trim() != ""){
+                $(this).popover({
+                    content : hmtlPopOver,
+                    html: true,
+                    title: "Name of Risks",
+                    trigger: 'manual',
+                    placement: 'right',
+                    container: 'body'
+                }).on('click', function(e) {
+                    $(this).popover('show');
+                    e.stopPropagation();
+                });
+            }else{
+                $(this).css('cursor','default');
+            }
+        });
+    }
+
+    /*var initFunctionsAndData = function(){
+        alert("bugged!");
+    }*/
 
     return {
         initialChartProjectRiskSetUp: function(main_list,drillDown_list){
@@ -96,49 +146,28 @@ var ChartJS = (function (){
 
         },
 
-        initialChartRiskMatrixSetUp: function(){
+        initialChartRiskMatrixSetUp: function(risksByProject){
             
-            var tableProjectFrecuency = $("#tableProjectFrecuency").DataTable({
-                "iDisplayLength": 5,
-                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
-                "dom": '<"row export"><"clear">lfrtip',   
-            });
+            var initFunctionsAndData = function(){
+                $('[data-toggle="popover"]').popover();
+            
+                if(risksByProject.length > 0) 
+                    $(".riskMatrix").show();
+                else                          
+                    $(".notFoundMatrix").show();
 
-            var tableTools = new $.fn.dataTable.TableTools( tableProjectFrecuency, {
-                "sSwfPath": BASE_URL+"/assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf",
-                 "aButtons": [ 
-                     {
-                        "sExtends": "xls",
-                        "sCharSet": "utf8",
-                        "sFileName": 'excelExport.xls',
-                        "sButtonText": "XLS"
-                     },
-                     {
-                        "sExtends": "csv",
-                        "sCharSet": "utf8",
-                        "sFileName": 'csvExport.csv',
-                        "sButtonText": "CSV"
-                     },
-                     {
-                        "sExtends": "pdf",
-                        "sCharSet": "utf8",
-                        "sFileName": 'PDF_Export.pdf',
-                        "sButtonText": "PDF"
-                     },
-                 ]
-            });
-              
-            $('.exportNav').html(tableTools.fnContainer());
+                $(document).on('click', function(e) {
+                    hideAllPopovers();
+                });
 
-            $( '.table_frencuency' ).on( 'click','.btnProjectAssociated', function() {
-                /*for AJAX Post*/
-                var params =  new Object();
-                params.id = $(this).data("id");
-                params.type = $(this).data("type");
-                
-                frecuencySearchAssociations(params);
-            });
- 
+                $( '.filters' ).on( 'change', function() {   
+                    window.location.href=BASE_URL+"/chart/riskMatrix/"+$("#filter_project").val();
+                });
+            }
+
+            initFunctionsAndData();
+            fillRiskTable(risksByProject);
+            createPopOvers();
         },
     }
 })();

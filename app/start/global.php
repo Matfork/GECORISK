@@ -49,6 +49,22 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+	
+    // if (Config::get('app.debug')) {
+    //     return;
+    // }
+
+    switch ($code)
+    {
+        case 403:
+            return Response::view('errors/403', array(), 403);
+
+        case 500:
+            return Response::view('errors/500', array(), 500);
+
+        default:
+            return Response::view('errors.404', array('url' => Request::url()), $code);
+    }
 });
 
 /*
@@ -66,6 +82,7 @@ App::down(function()
 {
 	return Response::make("Be right back!", 503);
 });
+
 
 /*
 |--------------------------------------------------------------------------
