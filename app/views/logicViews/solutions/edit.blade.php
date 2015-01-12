@@ -8,6 +8,10 @@
 
         <h1>Editing Solution</h1>
 
+         <div class="description_module">
+            <h5>Here you can update the description of the solution:<h5>
+        </div>
+
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 

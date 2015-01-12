@@ -6,7 +6,11 @@
 
         @include('includes.logicViews.risksProjects.header', array('param' => '1'))
 
-        <h1>Create Link</h1>
+        <h1>Creating Link</h1>
+
+        <div class="description_module">
+            <h5>Complete the following information to create a new link between a project and a risk:<h5>
+        </div>
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}

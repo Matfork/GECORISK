@@ -6,7 +6,11 @@
 
         @include('includes.logicViews.risks.header', array('param' => '2'))
 
-        <h1>Edit {{ $risk->name }}</h1>
+        <h1>Editing {{ $risk->name }}</h1>
+
+        <div class="description_module">
+            <h5>Update the following fields to change the current risk information:<h5>
+        </div>
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}

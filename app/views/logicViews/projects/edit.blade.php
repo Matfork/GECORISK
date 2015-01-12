@@ -17,6 +17,10 @@
 
     <h1>Editing {{ $project->name }}</h1>
 
+    <div class="description_module">
+        <h5>Update the following fields to change the current project information:<h5> 
+    </div>
+
     <!-- if there are creation errors, they will show here -->
     {{ HTML::ul($errors->all()) }}
 

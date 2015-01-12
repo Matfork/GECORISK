@@ -8,6 +8,11 @@
 
     <h1>Indicators Module</h1>
 
+    <div class="description_module">
+        <h5>In the following tables you will see all the indicators registered through the timelife of the application. <h5>
+        <h5> Also as a user of GecoRisk you can create, update, delete the indicators.</h5>
+    </div>
+
     <!-- will be used to show any messages -->
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>

@@ -15,8 +15,15 @@
         <div style="float:left"><h1>Solution Module</h1></div>
         <div style="float:right; margin-top:20px;"><a href="{{ URL::to('riskProject') }}" class="btn btn-primary">Return to RiskProjects</a></div>
     </div>
+
     <h4>Project: {{$solutions[0]->risksProjects->project->name}}</h4>
     <h4>Risk: {{$solutions[0]->risksProjects->risk->name}}</h4>
+
+    <div class="description_module">
+        <h5>In the following table you will see all the solutions registered through the timelife of the application related to the link described below. <h5>
+        <h5> Also as a user of GecoRisk you can create, update, delete the solutions, as well as adding documents to an specific solution.</h5>
+    </div>
+
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead>

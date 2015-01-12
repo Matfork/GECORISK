@@ -9,6 +9,10 @@
 
     <h1>Editing Indicator</h1>
 
+     <div class="description_module">
+        <h5>Update the following fields to change the current indicator information:<h5>
+    </div>
+
     <!-- if there are creation errors, they will show here -->
     {{ HTML::ul($errors->all()) }}
 

@@ -13,6 +13,11 @@
 
         <h1>Risk Module</h1>
         
+        <div class="description_module">
+            <h5>In the following tables you will see all the risk registered through the timelife of the application. <h5>
+            <h5> Also as a user of GecoRisk you can create, update, delete and link risks according to the necessity of the projects.</h5>
+        </div>
+        
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>

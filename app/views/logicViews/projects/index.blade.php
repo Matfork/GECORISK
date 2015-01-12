@@ -8,6 +8,11 @@
 
 <h1>Projects Module </h1>
 
+<div class="description_module">
+    <h5>In the following tables you will see all the projects registered through the timelife of the application. <h5>
+    <h5>Also as a user of GecoRisk you can create, update, delete and link projects with already registered risk.</h5>
+</div>
+
 <!-- will be used to show any messages -->
 @if (Session::has('message'))
     <div class="alert alert-info">{{ Session::get('message') }}</div>

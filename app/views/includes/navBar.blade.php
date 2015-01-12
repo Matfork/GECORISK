@@ -1,6 +1,6 @@
 <div class="left-sidebar">
 	<div class="vertical-align">
-		<h2>GecoRisk</h2>
+		<h2><a class="go_gecorisk" href="{{ URL::to('/') }}">GecoRisk</a></h2>
 		<ul class="nav">
 			<li><a href="{{ URL::to('risk') }}">{{ trans('leftSideBar.risk') }}</a></li>
 			<li><a href="{{ URL::to('project') }}">{{ trans('leftSideBar.project') }}</a></li>
@@ -37,6 +37,8 @@
 			      <li><a href="{{ URL::to('indicator') }}">{{ trans('leftSideBar.indicators') }}</a></li>
 			    </ul>
 		    </li>
+			<li><a href="{{  URL::to('users/logout') }}">{{ trans('leftSideBar.log_out') }}</a></li>			
+			
 		</ul>
 
 	</div>
@@ -50,7 +52,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		    </button>
-	     	<a class="navbar-brand" href="#">GecoRisk</a>
+	     	<a class="navbar-brand" href="{{ URL::to('/') }}">GecoRisk</a>
 	    </div>
 
 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
@@ -87,7 +89,8 @@
 			      	  <li><a href="{{ URL::to('projectType') }}">{{ trans('leftSideBar.projectType') }}</a></li>
 				      <li><a href="{{ URL::to('indicator') }}">{{ trans('leftSideBar.indicators') }}</a></li>
 				    </ul>
-			    </li>			
+			    </li>
+			     <li><a href="{{  URL::to('users/logout') }}">{{ trans('leftSideBar.log_out') }}</a></li>			
 			</ul>
 		</div>
 	</div>

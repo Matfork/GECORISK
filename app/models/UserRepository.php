@@ -24,6 +24,8 @@ class UserRepository
         $user->username = array_get($input, 'username');
         $user->email    = array_get($input, 'email');
         $user->password = array_get($input, 'password');
+        $user->first_name = array_get($input, 'first_name');
+        $user->middle_name = array_get($input, 'middle_name');
 
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's
@@ -33,11 +35,69 @@ class UserRepository
         // Generate a random confirmation code
         $user->confirmation_code     = md5(uniqid(mt_rand(), true));
 
-        // Save if valid. Password field will be hashed before save
-        $this->save($user);
+        //$user->confirmed = 1;
 
+        // Save if valid. Password field will be hashed before save
+        //save is a internal method which calls ConfideUser save method, and inside that the validations are made
+
+        $this->save($user);
+        //var_dump( $user->first_name);die;
+        
         return $user;
     }
+
+
+    public function update($input)
+    {
+ 
+        $rules = array(
+            'username'    => 'required',
+            'email'       => 'required|email',
+            'first_name'  => 'required',
+            'middle_name' => 'required',
+            'current_password' => 'required_with:new_password|current_password_check',
+            'new_password' => 'required_with:current_password|different:current_password|min:8',
+            'new_password_confirmation' => 'required_with:new_password|same:new_password'
+        );
+
+        $messages = array(
+            'current_password.current_password_check'=>'The current password field doesn\'t match your current password',
+            'new_password_confirmation.required_with'=>'The new password field doesn\'t match its confirmation'
+        );
+
+        $validator = Validator::make($input,$rules,$messages);
+        
+        if ($validator->fails()) {
+            return Redirect::to('/')->withErrors($validator);
+
+        } else {
+            
+           
+            $user         = User::find(Confide::user()->id);
+            $user->username = array_get($input, 'username');
+            $user->email    = array_get($input, 'email');
+            $user->first_name = array_get($input, 'first_name');
+            $user->middle_name = array_get($input, 'middle_name');
+
+            
+            if(trim(array_get($input, 'new_password')) != "")
+                $user->password =  App::make('hash')->make(array_get($input, 'new_password'));
+            
+
+            echo "<pre>";
+            var_dump($user); 
+            //die;
+
+            $user->save_with_eloquent();
+
+            // redirect
+            Session::flash('message', 'You info has been saved!');
+            return Redirect::to('/');
+        }
+    
+        return $user;
+    }
+
 
     /**
      * Attempts to login with the given credentials.
@@ -125,6 +185,7 @@ class UserRepository
      */
     public function save(User $instance)
     {
+
         return $instance->save();
     }
 }

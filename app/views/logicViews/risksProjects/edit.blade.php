@@ -8,6 +8,10 @@
 
         <h1>Editing link</h1>
 
+        <div class="description_module">
+            <h5>Update the following link information, gray boxes can't be modified.<h5>
+        </div>
+
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 

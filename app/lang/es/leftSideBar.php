@@ -15,5 +15,6 @@ return array(
 	'queries_project' => 'Consulta de Proyectos',
 	'queries_document' => 'Central de Documentos',	
 	'chart_projectRisk' => 'Riesgo-Proyectos',
-	'chart_riskMatrix' => 'Matriz de Riesgos'
+	'chart_riskMatrix' => 'Matriz de Riesgos',
+	'log_out' => 'Salir'
 );

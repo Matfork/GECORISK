@@ -18,6 +18,11 @@
         <h4>Project: {{$documents[0]->solution->risksProjects->project->name}} </h4>
         <h4>Risk: {{$documents[0]->solution->risksProjects->risk->name}} </h4>
         <h4>Solution: {{$documents[0]->solution->description}} </h4>
+
+        <div class="description_module">
+            <h5>In the following table you will see all the documents uploaded to the specific solution of the link decribed below. <h5>
+            <h5> Also as a user of GecoRisk you can create, update, delete and of course, download the documents.</h5>
+        </div>
         
         <div class="table-responsive">
             <table class="table table-striped table-bordered">

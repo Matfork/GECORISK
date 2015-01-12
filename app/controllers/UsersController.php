@@ -7,7 +7,7 @@
  *
  * Implements actions regarding user management
  */
-class UsersController extends Controller
+class UsersController extends \BaseController 
 {
 
     /**
@@ -54,6 +54,20 @@ class UsersController extends Controller
                 ->withInput(Input::except('password'))
                 ->with('error', $error);
         }
+    }
+
+
+      /**
+     * Stores new account
+     *
+     * @return  Illuminate\Http\Response
+     */
+    public function updateInfo()
+    {
+        $repo = App::make('UserRepository');
+        $user = $repo->update(Input::all());
+
+        return Redirect::to('/');
     }
 
     /**
@@ -155,7 +169,7 @@ class UsersController extends Controller
      */
     public function resetPassword($token)
     {
-        return View::make(Config::get('confide::reset_password_form'))
+        return View::make("users.reset_password")
                 ->with('token', $token);
     }
 
@@ -194,7 +208,6 @@ class UsersController extends Controller
     public function logout()
     {
         Confide::logout();
-
-        return Redirect::to('/');
+        return Redirect::to('/users/login');
     }
 }

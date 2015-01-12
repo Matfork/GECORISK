@@ -22,6 +22,12 @@
 
         <h1>Risk Project Module</h1>
 
+        <div class="description_module">
+            <h5>In the following tables you will see the list of projects which have been linked with some risks through the timelife of the application. <h5>
+            <h5>Also as a user of GecoRisk you can create, edit, delete links and add solutions to already registered links.</h5>
+        </div>
+
+
         <div class="row inputFilers">
             <div class="col-md-4 form-group">
                 {{ Form::label('filter_risk_project', 'Search Risk or Project') }}

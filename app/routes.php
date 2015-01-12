@@ -11,8 +11,14 @@
 |
 */
 
- Route::get('/', 'HomeController@showWelcome');
+Route::get('/', array('before' => 'auth',
+  'uses' => 'HomeController@showWelcome'
+));
  
+
+Route::group(array('before'=>'auth'), function()
+{
+
  Route::resource('risk', 'RiskController');
  Route::resource('project', 'ProjectController');
  Route::resource('indicator', 'IndicatorController');
@@ -24,10 +30,13 @@
  Route::resource('riskProject', 'RiskProjectController'); 
 
  //Route::controller('riski', 'RiskController');
+	 
+}); 
 
 
 
-Route::group(array('prefix' => 'riskProject'), function()
+
+Route::group(array('before'=>'auth','prefix' => 'riskProject'), function()
 {
 	 Route::get('{type}/{id}', [
 	 	'uses' => 'RiskProjectController@indexFilter',
@@ -53,7 +62,7 @@ Route::group(array('prefix' => 'riskProject'), function()
 }); 
 
 
-Route::group(array('prefix' => 'solution'), function()
+Route::group(array('before'=>'auth', 'prefix' => 'solution'), function()
 {
 	 Route::get('index/{id}', [
 	 	'uses' => 'SolutionController@indexFilter',
@@ -67,7 +76,7 @@ Route::group(array('prefix' => 'solution'), function()
 }); 
 
 
-Route::group(array('prefix' => 'document'), function()
+Route::group(array('before'=>'auth','prefix' => 'document'), function()
 {
 	 Route::get('index/{id}', [
 	 	'uses' => 'DocumentController@indexFilter',
@@ -80,7 +89,7 @@ Route::group(array('prefix' => 'document'), function()
 	 );
 }); 
 
-Route::group(array('prefix' => 'frecuency'), function()
+Route::group(array('before'=>'auth','prefix' => 'frecuency'), function()
 {
     Route::get('risk/{id?}', [
 	 	'uses' => 'FrecuencyController@indexFrecuencyRisk',
@@ -107,7 +116,7 @@ Route::group(array('prefix' => 'frecuency'), function()
 
 
 
-Route::group(array('prefix' => 'chart'), function()
+Route::group(array('before'=>'auth','prefix' => 'chart'), function()
 {
     Route::get('projectRisk/{id?}', [
 	 	'uses' => 'ChartController@indexChartProjectRisk',
@@ -131,3 +140,4 @@ Route::post('users/forgot_password', 'UsersController@doForgotPassword');
 Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
 Route::post('users/reset_password', 'UsersController@doResetPassword');
 Route::get('users/logout', 'UsersController@logout');
+Route::post('users/update', 'UsersController@updateInfo');

@@ -8,6 +8,12 @@
            
         <h1>Adding document</h1>
 
+         <div class="description_module">
+            <h5>Here you can add a document (pdf, word, excel) to the solution previously selected:<h5>                
+            <h5>Note: The max size of the file is 10mb.<h5>
+        </div>
+
+
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 

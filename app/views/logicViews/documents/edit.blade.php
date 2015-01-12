@@ -7,6 +7,11 @@
 
         <h1>Editing {{ $document->name }}</h1>
 
+        <div class="description_module">
+            <h5>Here you can modify the document (pdf, word, excel) previously uploaded as well as its information<h5>                
+            <h5>Note: The max size of the file is 10mb.<h5>
+        </div>
+
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 

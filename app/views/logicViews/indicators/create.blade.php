@@ -8,6 +8,10 @@
 
     <h1>Creating Indicator</h1>
 
+    <div class="description_module">
+        <h5>Complete the following information to create a new indicator:<h5>
+    </div>
+
     <!-- if there are creation errors, they will show here -->
     {{ HTML::ul($errors->all()) }}
 

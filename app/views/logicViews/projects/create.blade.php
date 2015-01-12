@@ -13,7 +13,11 @@
 
         @include('includes.logicViews.projects.header', array('param' => '1'))
         
-        <h1>Create a project</h1>
+        <h1>Creating a new project</h1>
+
+        <div class="description_module">
+            <h5>Complete the following information to create a new Project:<h5>
+        </div>
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}

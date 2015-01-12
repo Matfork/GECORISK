@@ -27,6 +27,12 @@
             </div>
         </div>
 
+        <div class="description_module">
+            <h5>Here you can see the all the projects which has been registered through the timelife of the application, and if you click in the purple button you can see all the risks linked to the selected project</h5>
+            <h5>Also, risks are displayed with their risk level calculated by the Impact x Probabilty, you should keep track of all risks, specially the ones in red which are the most dangerous.</h5>
+         
+         </div>
+
         <div class="table_frencuency table-responsive">
            <table id="tableProjectFrecuency" class="table table-striped table-bordered">
                 <thead>

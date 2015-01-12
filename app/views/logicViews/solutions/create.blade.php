@@ -8,6 +8,10 @@
             
         <h1>Adding solution</h1>
 
+         <div class="description_module">
+            <h5>Here you can add a short description of a solution which is going to be added to the link previously selected:<h5>
+        </div>
+
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 

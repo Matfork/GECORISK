@@ -26,6 +26,14 @@
                 </div>           
             </div>
         </div>
+
+        <div class="description_module">
+            <h5>Here you can see the frecuency of times that an specific risk has been linked to different projects, the percentage shown in the table is calculated by the number of total projects in which the risk has appeared.
+                The more frecuency the more times the risk has appeared in projects</h5>
+            <h5>With this information you can take on account which risk you need to track in order to control the probability and impact  in the project you are working in right now.<h5>
+            <h5>Also if you clink in the purple button next to the risk, you can view the projects in which the risks has been linked.</h5>
+        </div>
+        
         <h4>Total Projects: {{$total_projects}} </h4>
 
         <div class="table_frencuency table-responsive">

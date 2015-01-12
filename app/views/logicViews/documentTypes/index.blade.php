@@ -13,6 +13,11 @@
 
     <h1>Document Types Module</h1>
     
+    <div class="description_module">
+        <h5>In the following tables you will see all the document types registered through the timelife of the application. <h5>
+        <h5> Also as a user of GecoRisk you can create, update, delete the documents types.</h5>
+    </div>
+
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead>

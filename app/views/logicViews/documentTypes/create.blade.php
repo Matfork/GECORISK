@@ -6,7 +6,11 @@
 
         @include('includes.logicViews.documentTypes.header', array('param' => '1')) 
 
-        <h1>Create Document Type</h1>
+        <h1>Creating Document Type</h1>
+
+        <div class="description_module">
+            <h5>Complete the following information to create a document type:<h5>
+        </div>
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}

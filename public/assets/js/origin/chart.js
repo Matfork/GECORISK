@@ -152,7 +152,7 @@ var ChartJS = (function (){
                 $('[data-toggle="popover"]').popover();
             
                 if(risksByProject.length > 0) 
-                    $(".riskMatrix").show();
+                    $(".riskMatrix").fadeIn(500);
                 else                          
                     $(".notFoundMatrix").show();
 

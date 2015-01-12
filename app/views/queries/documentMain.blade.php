@@ -27,12 +27,17 @@
         @endif
 
         <div style="height:75px;">
-            <div style="float:left"> <h1>Document Main</h1></div>
+            <div style="float:left"> <h1>Document Center</h1></div>
             <div class="exportNav">
             </div>
         </div>
+
+        <div class="description_module">
+            <h5>In the following table you will see all the documents uploaded through the timelife of the application. <h5>
+            <h5>Also as a user of GecoRisk you download all the documents you may need.</h5>
+        </div>
         
-        <table id="tableDocumentMain" class="table table-striped table-bordered">
+        <table id="tableDocumentMain" class="table table-striped table-bordered" style="margin-top:25px;">
             <thead>
                 <tr>
                     <td>#</td>

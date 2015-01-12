@@ -8,6 +8,10 @@
 
     <h1>Editing {{ $riskType->name }}</h1>
 
+    <div class="description_module">
+        <h5>Update the following fields to change the current risk type information:<h5>
+    </div>
+
     <!-- if there are creation errors, they will show here -->
     {{ HTML::ul($errors->all()) }}
 

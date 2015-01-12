@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::guest('users/login');
 		}
 	}
 });
@@ -92,4 +92,4 @@ Route::filter('csrf', function()
 
 // Only authenticated users will be able to access routes that begins with
 // 'admin'. Ex: 'admin/posts', 'admin/categories'.
-Route::when('admin*', 'auth');
+Route::when('admin/*', 'auth');

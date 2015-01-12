@@ -6,7 +6,11 @@
 
         @include('includes.logicViews.risks.header', array('param' => '1'))
 
-        <h1>Create a risk</h1>
+        <h1>Creating a new risk</h1>
+
+        <div class="description_module">
+            <h5>Complete the following information to create a new risk:<h5>
+        </div>
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
