@@ -21,7 +21,7 @@ module.exports = function(grunt) {
             options: {
                 banner: ''
             },
-            target_1: {
+            gecorisk: {
                 // Source file
                 src: ['./public/assets/js/build/main.js'],
                 // Minified new file
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                     './public/assets/cdss/build/styles.min.css': './public/assets/css/sass/main.scss'
+                     './public/assets/css/build/styles.min.css': './public/assets/css/sass/main.scss'
                 }
             }
          },
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
                 files: ['./public/assets/js/build/main.js'],
                 tasks: ['uglify']
             },
-             sass: {
+            sass: {
                 files: ['./public/assets/css/sass/**/*.scss'],
                 tasks: ['sass'],
             },
