@@ -17,8 +17,11 @@ The system has 5 main modules and the admin module (for parameters stuff):
 - Charts
 * Admin Module  
 
-The system is build in PHP using laravel 4.2 as framework, it also uses grunt, bower and confide for simple authentication stuff.
+The system is build in PHP using laravel 4.2 as framework, it also uses grunt, bower and confide for simple authentication stuff,
+right now there is no role/permissions module added, so every user register on the system have the same privilegies.
+ 
 The system is open source! Feel free to modify it the way you like it according to your curent necessities.
+
 
 Installation:
 ============
