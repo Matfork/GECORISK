@@ -8,5 +8,4 @@ composer.lock
 Thumbs.db
 /node_modules/
 /.sass-cache/
-/app/config/mail.php/
 /public/uploads/gecorisk/
