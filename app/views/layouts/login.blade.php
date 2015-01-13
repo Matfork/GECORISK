@@ -15,7 +15,7 @@
             box-shadow: 0 0 20px #AAA;
             position: relative;
             top:50%;
-            transform:translateY(-70%);
+            transform:translateY(-50%);
             text-align: center;
         } 
 

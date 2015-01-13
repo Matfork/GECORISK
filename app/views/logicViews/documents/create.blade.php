@@ -9,7 +9,7 @@
         <h1>Adding document</h1>
 
          <div class="description_module">
-            <h5>Here you can add a document (pdf, word, excel) to the solution previously selected:<h5>                
+            <h5>Here you can add a document (pdf, doc, docx, xlsx, png, jpg, txt) to the solution previously selected:<h5>                
             <h5>Note: The max size of the file is 10mb.<h5>
         </div>
 

@@ -46,7 +46,7 @@ class Document extends Eloquent {
 
 	public function getUrlByType($docType){
 
-		$url = '../uploads/gecorisk/';
+		$url = 'uploads/gecorisk/';
 
 		switch ($docType) {
 			case '1':
