@@ -1,5 +1,7 @@
 <?php
 
+use \Libraries\MimeReader as MimeReader;
+
 class DocumentController extends \BaseController {
 
 	/**
@@ -55,14 +57,17 @@ class DocumentController extends \BaseController {
 	 */
 	public function store()
 	{
-			 // validate
-        // read more on validation at http://laravel.com/docs/validation
+
         $rules = array(
-            'documentToUpload' =>  'required | mimes:jpeg,doc,docx,txt,pdf | max: 10485760' //10mb as max 
+            'documentToUpload' =>  'required | formats | max: 10485760' //10mb as max 
+        );
+
+        $messages = array(
+            'documentToUpload.formats'=>'The file extension is not allowed!',
         );
 
         //var_dump(Input::all());die;
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules, $messages);
 
         // process the login
         if ($validator->fails()) {
@@ -146,9 +151,16 @@ class DocumentController extends \BaseController {
 	{
 		// validate
         // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'documentToUpload' =>  'mimes:jpeg,doc,docx,txt,pdf | max: 10485760' //10mb as max 
+ 		$rules = array(
+            'documentToUpload' =>  'required | formats | max: 10485760' //10mb as max 
         );
+
+        $messages = array(
+            'documentToUpload.formats'=>'The file extension is not allowed!',
+        );
+
+        //var_dump(Input::all());die;
+        $validator = Validator::make(Input::all(), $rules, $messages);
 
         $validator = Validator::make(Input::all(), $rules);
 			
