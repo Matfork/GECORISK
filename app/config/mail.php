@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array( 'address' => 'matfork.dh@gmail.com', 'name' => 'GecoRisk' ), 	
+	'from' => array( 'address' => '', 'name' => 'GecoRisk' ), 	
 	/*
 	|--------------------------------------------------------------------------
 	| E-Mail Encryption Protocol
@@ -79,7 +79,7 @@ return array(
 	|
 	*/
 
-	'username' => 'matfork.dh@gmail.com',
+	'username' => '',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -92,7 +92,7 @@ return array(
 	|
 	*/
 
-	'password' => 'matfork45',
+	'password' => '',
 
 	/*
 	|--------------------------------------------------------------------------

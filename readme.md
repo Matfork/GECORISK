@@ -44,12 +44,23 @@ bower install</pre>
 - Run migrations and seeder with
 <pre> php artisan migrate --seeder</pre>
 
+
+Email Confirmation: 
+
 - If you don't want to send email as confirmation after creating a new user account, go to 
 /vendor/zizaco/confide/src/config/config.php and change to false the next lines:
-
-<pre>'signup_email'   => false,
+<pre>
+	'signup_email'   => false,
     'signup_confirm' => false,
 </pre> 
+
+-Otherwise, you can set an account to send the emails in config/main.php, by default it is set gmail as host, but you can change it need it, also add the credentials of your bout account:
+<pre>
+	'from' => array( 'address' => 'yourEmail@gmail.com', 'name' => 'GecoRisk' ), 	
+	'username' => 'yourEmail@gmail.com',
+	'password' => 'yourPassword',
+</pre>
+
 
 - For documents storage: create  folder named "uploads/gecorisk" inside public folder.
 
