@@ -7,6 +7,7 @@
 
      <script>
         $(function(){
+            GeneralJS.initGeneralSetUp();
             RiskProjectJS.initialSetUp();
         });
     </script>
@@ -89,12 +90,13 @@
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                             </td >
                             <td style="width:2%;">
-                                <!-- delete the nerd (uses the destroy method DESTROY /riskprojects/{id} -->
-                                <!-- we will add this later since its a little more complicated than the other two buttons -->
-                                 {{ Form::open(array('url' => 'riskProject/' . $value->risk_project_id)) }}
-                                    {{ Form::hidden('_method', 'DELETE') }}
-                                    {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', array('type'=>'submit' , 'class' => 'btn btn-danger btn-block')) }}
-                                {{ Form::close() }}  
+                                 <!-- With this we call a general modal to delete information, but we provide to that modal what we want to delete-->
+                                {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', 
+                                    array('data-deleteContentInfo'=>'Are you Sure you want to delete the selected Link? There is not turning back!',
+                                          'data-toDelete'=>'riskProject/' . $value->risk_project_id,'data-toggle'=>'modal',
+                                          'data-target'=>'#confirm-delete','type'=>'button' 
+                                          , 'class' => 'btn btn-danger btn-block')) 
+                                }} 
                             </td>
                         </tr>
                     @endforeach
