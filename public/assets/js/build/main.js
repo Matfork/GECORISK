@@ -170,6 +170,20 @@ var ChartJS = (function (){
             createPopOvers();
         },
     }
+})();;var DocumentJS = (function (){
+
+	return {
+
+		initDocumentSetUp: function(){
+
+			 $("#tableDocuments").DataTable( {
+                "iDisplayLength": -1,
+                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
+            });
+
+		}
+	}
+
 })();;var FrecuencyJS = (function (){
 
     var frecuencySearchAssociations = function(params){
@@ -310,6 +324,57 @@ var ChartJS = (function (){
             });
         },
     }
+})();;var GeneralJS = (function (){
+
+	var  centerModal = function (modal) {
+	    $(modal).css('display', 'block');
+	    var $dialog = $(modal).find(".modal-dialog");
+	    var offset = ($(window).height() - $dialog.height()) / 2;
+	    // Center modal vertically in window
+	    $dialog.css("margin-top", offset);
+	}
+
+	return {
+
+		initGeneralSetUp: function(){
+
+			$('#confirm-delete').on('show.bs.modal', function(e) {
+				centerModal(this);
+			    $(this).find('.modal_delete_form').attr('action', BASE_URL+"/"+$(e.relatedTarget).attr('data-toDelete'));
+			    $(this).find('.headDeleteinfo').html($(e.relatedTarget).attr('data-deleteContentInfo'));
+			});
+
+		}
+	}
+
+})();;var ProjectJS = (function (){
+
+	return {
+
+		initProjectSetUp: function(){
+
+			 $("#tableProjects").DataTable( {
+                "iDisplayLength": -1,
+                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
+            });
+
+		}
+	}
+
+})();;var RiskJS = (function (){
+
+	return {
+
+		initRiskSetUp: function(){
+
+			 $("#tableRisks").DataTable( {
+                "iDisplayLength": -1,
+                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
+            });
+
+		}
+	}
+
 })();;var RiskProjectJS = (function (){
 
     var riskProjectSearch = function(params){
@@ -388,4 +453,18 @@ var ChartJS = (function (){
             }); 
         },
     }
+})();;var SolutionJS = (function (){
+
+	return {
+
+		initSolutionSetUp: function(){
+
+			 $("#tableSolutions").DataTable( {
+                "iDisplayLength": -1,
+                 "aLengthMenu": [[5, 25, 100, -1], [5, 25, 100, "All"]],
+            });
+
+		}
+	}
+
 })();

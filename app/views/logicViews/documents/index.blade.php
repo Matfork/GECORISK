@@ -1,6 +1,13 @@
 @extends('layouts.default')
 
 @section('content')
+    
+    <script>
+        $(function () {
+            GeneralJS.initGeneralSetUp();
+            DocumentJS.initDocumentSetUp();
+        });
+    </script>
 
     <div class="container">
 
@@ -25,15 +32,21 @@
         </div>
         
         <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+            <table id="tableDocuments" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <td>#</td>
-                        <td>File Name</td>
-                        <td>File Description</td>
-                        <td>Document Type</td>
+                        <td rowspan="2">#</td>
+                        <td rowspan="2">File Name</td>
+                        <td rowspan="2">File Description</td>
+                        <td rowspan="2">Document Type</td>
                         <td colspan="3">Actions</td>
                     </tr>
+                     <!-- trick for datatable colspan issue -->
+                    <tr style="display:none;">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                     </tr>
                 </thead>
                 <tbody>
                 @foreach($documents as $key => $value)
@@ -52,11 +65,15 @@
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                         </td>
                         <td style="width:2%">
-                            {{ Form::open(array('url' => 'document/' . $value->document_id)) }}
-                                {{ Form::hidden('_method', 'DELETE') }}
-                                {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', array('type'=>'submit' , 'class' => 'btn btn-danger btn-block')) }}
-                            {{ Form::close() }}
-                         </td>
+
+                             <!-- With this we call a general modal to delete information, but we provide to that modal what we want to delete-->
+                            {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', 
+                                array('data-deleteContentInfo'=>'Are you Sure you want to delete the selected Document? There is not turning back!',
+                                      'data-toDelete'=>'document/' . $value->document_id,'data-toggle'=>'modal',
+                                      'data-target'=>'#confirm-delete','type'=>'button' 
+                                      , 'class' => 'btn btn-danger btn-block')) 
+                            }} 
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
