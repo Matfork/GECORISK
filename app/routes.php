@@ -34,8 +34,6 @@ Route::group(array('before'=>'auth'), function()
 }); 
 
 
-
-
 Route::group(array('before'=>'auth','prefix' => 'riskProject'), function()
 {
 	 Route::get('{type}/{id}', [

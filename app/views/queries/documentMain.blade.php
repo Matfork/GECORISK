@@ -3,10 +3,10 @@
 @section('content')
 
     <script type="text/javascript" src="{{ url('assets/bower_components/datatables-bootstrap3/BS3/assets/js/datatables.js') }}"></script>    
-    <link rel="stylesheet" href="{{ url('assets/bower_components/datatables-bootstrap3/BS3/assets/css/datatables.css') }}">
-
     <script type="text/javascript" src="{{ url('assets/bower_components/datatables-tabletools/js/dataTables.tableTools.js') }}"></script>    
-    <link rel="stylesheet" href="{{ url('assets/bower_components/datatables-tabletools/css/dataTables.tableTools.css') }}">
+
+    <link rel="stylesheet" href="{{ url('assets/bower_components/datatables-bootstrap3/BS3/assets/css/datatables.css') }}">
+   <link rel="stylesheet" href="{{ url('assets/bower_components/datatables-tabletools/css/dataTables.tableTools.css') }}">
 
     <script>
      $(function(){

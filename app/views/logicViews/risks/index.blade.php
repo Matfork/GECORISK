@@ -1,7 +1,14 @@
 @extends('layouts.default')
 
 @section('content')
-   
+
+    <script>
+        $(function () {
+            GeneralJS.initGeneralSetUp();
+            RiskJS.initRiskSetUp();
+        });
+    </script> 
+
     <div class="container">
 
          @include('includes.logicViews.risks.header', array('param' => '2'))
@@ -18,18 +25,25 @@
             <h5> Also as a user of GecoRisk you can create, update, delete and link risks according to the necessity of the projects.</h5>
         </div>
         
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+        <div  class="table-responsive">
+            <table id="tableRisks" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <td>#</td>
-                        <td>Name</td>
-                        <td>Description</td>
-                        <td>Risk Type</td>
+                        <th rowspan="2">#</th>
+                        <th rowspan="2">Name</th>
+                        <th rowspan="2">Description</th>
+                        <th rowspan="2">Risk Type</th>
                         <!-- <td>Projects_related</td> 
                         <td>RiskProject</td> -->
-                        <td colspan="4">Actions</td>
+                        <th colspan="4">Actions</th>
                     </tr>
+                    <!-- trick for datatable colspan issue -->
+                    <tr style="display:none;">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                     </tr>
                 </thead>
                 <tbody>
                 @foreach($risks as $key => $value)
@@ -73,12 +87,13 @@
                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                         </td>
                         <td style="width:2%;">
-                            <!-- delete the nerd (uses the destroy method DESTROY /risks/{id} -->
-                            <!-- we will add this later since its a little more complicated than the other two buttons -->
-                             {{ Form::open(array('url' => 'risk/' . $value->risk_id, 'class' => 'pull-right')) }}
-                                {{ Form::hidden('_method', 'DELETE') }}
-                                {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', array('type'=>'submit' , 'class' => 'btn btn-danger btn-block')) }}
-                            {{ Form::close() }}
+                            <!-- With this we call a general modal to delete information, but we provide to that modal what we want to delete-->
+                            {{ Form::button( '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>', 
+                                array('data-deleteContentInfo'=>'Are you Sure you want to delete the selected Risk? There is not turning back!', 
+                                      'data-toDelete'=>'risk/'.$value->risk_id,'data-toggle'=>'modal',
+                                      'data-target'=>'#confirm-delete','type'=>'button' , 
+                                      'class' => 'btn btn-danger btn-block')) 
+                             }}   
                         </td>
                     </tr>
                 @endforeach
@@ -86,4 +101,5 @@
             </table>
         </div>
     </div>
+
 @stop

@@ -67,6 +67,10 @@ Email Confirmation:
 
 - For documents storage: create  folder named "uploads/gecorisk" inside public folder.
 
+- Remember to disable Whoops! on production, only edit app.php and set:
+	<pre> 'debug' => false</pre>
+
+
 - Don't forget to set a virtual host to the system application, if you have problems you can follow the next guide:
 https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts
 
