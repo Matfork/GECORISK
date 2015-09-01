@@ -57,9 +57,11 @@ class DocumentController extends \BaseController {
 	 */
 	public function store()
 	{
+		// We need also to change the upload_max_filesize attribute in php.ini to 10MB 
+		// # /etc/php5/apache2/php.ini 
 
         $rules = array(
-            'documentToUpload' =>  'required | formats | max: 10485760' //10mb as max 
+            'documentToUpload' =>  ' formats | max: 10485760' //10mb as max 
         );
 
         $messages = array(
@@ -68,7 +70,6 @@ class DocumentController extends \BaseController {
 
         //var_dump(Input::all());die;
         $validator = Validator::make(Input::all(), $rules, $messages);
-
         // process the login
         if ($validator->fails()) {
             return Redirect::to('document/create/'.Input::get('solution_id'))->withErrors($validator);
@@ -82,6 +83,7 @@ class DocumentController extends \BaseController {
 			// var_dump($file->getClientMimeType());
 			// var_dump($file->guessClientExtension());
 			// var_dump($file->getRealPath());
+			// die;
 
 			$filename = value(function() use ($file){
 		        $filename = str_random(10) . '.' . $file->getClientOriginalExtension();
